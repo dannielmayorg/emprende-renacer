@@ -1,40 +1,232 @@
 [
   {
     "año": 2025,
-    "carpeta": "logos emprendimientos feria",
+    "carpeta": "https://pub-d85456d79cef4d6d8a796e31c6360dac.r2.dev/logos",
     "emprendimientos": [
-      { "archivo": "5 nueces.jpeg",                                    "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "A tu abrigo.jpeg",                                  "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "ACADEMIA LATIN GOSPEL 40.jpeg",                    "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Aguacates en casa.com.jpeg",                       "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "BIKEWAY Ropa deportiva.jpeg",                      "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Belleza Radiante.jpeg",                            "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Bye Spot.jpeg",                                    "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "CASA CREA.jpeg",                                   "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "CREW.png",                                         "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "DNC Studio Collectives.jpeg",                      "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "DULCE TENTACIÓN.jpeg",                             "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Diana López - Catsitter.jpeg",                     "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Diseño Divino.jpeg",                               "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "El alfarero creaciones.jpeg",                      "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "FIREWOOD VIBES.jpeg",                              "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "HacksGabs.jpeg",                                   "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Honney Poppy's pasteleria.jpeg",                   "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Instrumentos de gracia by Erika Beltran.png",      "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Inty Lettering.jpeg",                              "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Les Colors.jpeg",                                  "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Los postres de Majito.jpeg",                       "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "MiniDonedos.jpeg",                                 "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Misión wayu.png",                                  "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "NUDOS PELUDOS.jpeg",                               "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Pétalos de Chenille.jpeg",                         "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Plantas Greenlove.jpeg",                           "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "RENAWARE.jpeg",                                    "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "SM Accesorios.jpeg",                               "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "SOMBRILLAS GO.jpeg",                               "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "Sabores de mi tierra.jpeg",                        "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "ancla firme decoración.jpeg",                      "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" },
-      { "archivo": "purifil.jpeg",                                     "categoria": "", "descripcion": "", "contacto_whatsapp": "", "contacto_instagram": "" }
+      {
+        "archivo": "5 nueces.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "A tu abrigo.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "ACADEMIA LATIN GOSPEL 40.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Aguacates en casa.com.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "BIKEWAY Ropa deportiva.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Belleza Radiante.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Bye Spot.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "CASA CREA.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "CREW.png",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "DNC Studio Collectives.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "DULCE TENTACIÓN.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Diana López - Catsitter.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Diseño Divino.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "El alfarero creaciones.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "FIREWOOD VIBES.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "HacksGabs.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Honney Poppy's pasteleria.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Instrumentos de gracia by Erika Beltran.png",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Inty Lettering.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Les Colors.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Los postres de Majito.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "MiniDonedos.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Misión wayu.png",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "NUDOS PELUDOS.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Pétalos de Chenille.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Plantas Greenlove.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "RENAWARE.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "SM Accesorios.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "SOMBRILLAS GO.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "Sabores de mi tierra.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "ancla firme decoración.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      },
+      {
+        "archivo": "purifil.jpeg",
+        "categoria": "",
+        "descripcion": "",
+        "contacto_whatsapp": "",
+        "contacto_instagram": ""
+      }
     ]
   }
 ]

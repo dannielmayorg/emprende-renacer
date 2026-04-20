@@ -544,7 +544,7 @@
         let   timer;
 
         track.innerHTML = fotos.map(f =>
-          '<div class="carrusel-slide"><img src="fotos-2025/' + f + '" alt="" loading="lazy" /></div>'
+          '<div class="carrusel-slide"><img src="' + f + '" alt="" loading="lazy" /></div>'
         ).join('');
 
         function ir(idx) {
