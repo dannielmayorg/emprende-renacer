@@ -1,0 +1,8 @@
+[
+  { "hora": "9:00 AM",  "actividad": "Apertura de puertas" },
+  { "hora": "9:30 AM",  "actividad": "Bienvenida oficial" },
+  { "hora": "10:00 AM", "actividad": "Taller — por confirmar" },
+  { "hora": "12:00 PM", "actividad": "Almuerzo y conexión" },
+  { "hora": "2:00 PM",  "actividad": "Taller — por confirmar" },
+  { "hora": "4:00 PM",  "actividad": "Cierre y oración" }
+]

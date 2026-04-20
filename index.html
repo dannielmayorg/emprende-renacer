@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Feria de Emprendimiento Renacer — Tercera edición, 1 de mayo de 2026." />
+  <title>Emprende · Renacer 2026</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════
+       NAV
+  ══════════════════════════════════════════ -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero-wrapper" class="nav-logo">
+        <span class="logo-mark">Emprende<span class="logo-dot">·</span>Renacer</span>
+      </a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#mision">Misión</a></li>
+        <li><a href="#perfiles">Perfiles</a></li>
+        <li><a href="#cronograma">Cronograma</a></li>
+        <li><a href="#directorio">Directorio</a></li>
+        <li><a href="#participar" class="btn-cta" style="padding:0.55rem 1.2rem;font-size:0.8rem;">
+          Inscríbete
+        </a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════
+       HERO — carrusel de fondo
+  ══════════════════════════════════════════ -->
+  <div id="hero-wrapper">
+    <section id="hero">
+
+      <!-- Carrusel como fondo -->
+      <div id="hero-carrusel">
+        <div class="carrusel-track" id="carrusel-track"></div>
+        <div class="hero-scrim"></div>
+      </div>
+
+      <!-- Etiquetas -->
+      <span class="carrusel-label">Edición 2025</span>
+      <span class="carrusel-counter" id="carrusel-counter"></span>
+
+      <!-- Contenido: izquierda + derecha -->
+      <div class="hero-content">
+        <div class="hero-left">
+          <span class="hero-eyebrow">Feria de emprendimiento</span>
+          <h1 class="hero-titulo"><span class="logo-mark logo-mark-hero">Emprende<span class="logo-dot logo-dot-hero">·</span>Renacer</span></h1>
+          <p class="hero-fecha-text" id="hero-fecha">1 de mayo de 2026</p>
+          <div class="hero-cta-wrap">
+            <a href="#participar" class="btn-cta" id="hero-cta">
+              Quiero participar
+              <span class="btn-arrow">→</span>
+            </a>
+            <a href="#mision" class="btn-outline">Conocer más</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <p class="hero-frase">"Un espacio donde la fe<br>y el emprendimiento<br>se encuentran."</p>
+        </div>
+      </div>
+
+    </section>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       LOGO STRIP — emprendimientos
+  ══════════════════════════════════════════ -->
+  <div id="logo-strip-section">
+    <a href="#directorio" class="logo-strip-label">Emprendedores de esta edición →</a>
+    <div class="logo-strip-track" id="logo-strip-track" aria-label="Logos de emprendimientos"></div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       INFO DEL EVENTO
+  ══════════════════════════════════════════ -->
+  <section id="info-evento">
+    <div class="container">
+
+      <div class="info-hero-text">
+        <span class="label-seccion">Tercera edición · 01 de mayo</span>
+        <h2 class="titulo-seccion">Más que una feria,<br>un encuentro con propósito</h2>
+        <p class="info-subtitulo">Ven, disfruta y apoya el talento de nuestros emprendedores: artesanías, moda, detalles únicos, delicias gastronómicas y mercadito natural.</p>
+      </div>
+
+      <div class="info-cards">
+
+        <div class="info-card info-card-solidario">
+          <span class="info-card-tag">Nuestra feria tiene corazón</span>
+          <h3 class="info-card-titulo">¡Stand solidario:<br>Gran venta de garaje!</h3>
+          <p class="info-card-texto">Todo lo recaudado será para apoyar a una familia de nuestra congregación.</p>
+          <div class="info-dona">
+            <strong>Dona hoy:</strong> trae artículos en excelente estado. Recibimos donaciones hasta el 20 de abril en la iglesia. Acompáñanos este 01 de mayo — ven a la feria, encuentra un tesoro y apoya esta causa.
+          </div>
+          <div class="info-contactos">
+            <span class="info-contactos-label">Contacto</span>
+            <a href="https://wa.me/573138913217" target="_blank" rel="noopener" class="info-wa-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Mercedes Cuellar
+            </a>
+            <a href="https://wa.me/573107863801" target="_blank" rel="noopener" class="info-wa-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Martha Gil
+            </a>
+          </div>
+        </div>
+
+        <div class="info-datos">
+          <div class="info-dato">
+            <span class="info-dato-label">Fecha</span>
+            <span class="info-dato-valor">Viernes festivo<br>01 de mayo</span>
+          </div>
+          <div class="info-dato">
+            <span class="info-dato-label">Hora</span>
+            <span class="info-dato-valor">10 AM</span>
+          </div>
+          <div class="info-dato">
+            <span class="info-dato-label">Lugar</span>
+            <span class="info-dato-valor">CLL 168 #52-38</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       MISIÓN — split layout
+  ══════════════════════════════════════════ -->
+  <section id="mision">
+    <div class="container">
+      <div class="mision-grid">
+
+        <div class="mision-izq">
+          <span class="label-seccion">Nuestra misión</span>
+          <h2 class="titulo-seccion">Un espacio para crecer en comunidad</h2>
+        </div>
+
+        <div class="mision-der">
+          <p>La Feria de Emprendimiento nace de una necesidad real: ayudar a los emprendedores de la comunidad a darse a conocer. Queremos ser de bendición a nuestros hermanos, potenciar sus negocios y darles un espacio dentro de la iglesia para crecer, despegar y conectar.</p>
+
+          <div class="mision-destacado">
+            Esta feria no es un evento de ventas. Es un punto de encuentro entre hermanos que emprenden.
+          </div>
+
+          <p>No venimos a buscar clientes. Venimos a obedecer. Dios puso en nosotros el deseo de emprender y nos dio una comunidad para hacerlo crecer — la feria es el espacio donde esas dos cosas se juntan.</p>
+
+          <a href="#participar" class="btn-cta">
+            Quiero participar
+            <span class="btn-arrow">→</span>
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       PERFILES
+  ══════════════════════════════════════════ -->
+  <section id="perfiles">
+    <div class="container">
+
+      <div class="perfiles-header">
+        <div>
+          <span class="label-seccion">Perfiles de participante</span>
+          <h2 class="titulo-seccion">¿Cómo puedes participar?</h2>
+        </div>
+        <div class="tabs-nav" role="tablist">
+          <button class="tab-btn active" role="tab" aria-selected="true"  data-tab="establecido">Establecido</button>
+          <button class="tab-btn"        role="tab" aria-selected="false" data-tab="necesidad">Por necesidad</button>
+          <button class="tab-btn"        role="tab" aria-selected="false" data-tab="jovenes">Jóvenes</button>
+        </div>
+      </div>
+
+      <!-- Tab 1 -->
+      <div class="tab-panel active" id="tab-establecido" role="tabpanel">
+        <div class="perfil-card">
+          <div>
+            <p class="perfil-numero">01</p>
+            <h3 class="perfil-nombre">Emprendedor establecido</h3>
+            <p class="perfil-desc">Tiene un emprendimiento activo con trayectoria comprobada.</p>
+          </div>
+          <div class="perfil-requisitos">
+            <h4>Requisitos</h4>
+            <ul>
+              <li>Mínimo 1 año de antigüedad en el emprendimiento</li>
+              <li>Demostrar actividad: historial de ventas, actividad por temporadas o soporte visible</li>
+              <li>Completar el formulario de aplicación</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2 -->
+      <div class="tab-panel" id="tab-necesidad" role="tabpanel">
+        <div class="perfil-card">
+          <div>
+            <p class="perfil-numero">02</p>
+            <h3 class="perfil-nombre">Por necesidad</h3>
+            <p class="perfil-desc">Hermanos que necesitan apoyo económico, tienen las habilidades para sacar adelante un emprendimiento y quieren dar ese paso de fe dentro de nuestra comunidad.</p>
+          </div>
+          <div class="perfil-requisitos">
+            <h4>Requisitos</h4>
+            <ul>
+              <li>Completar el formulario de aplicación</li>
+              <li>Entrevista breve con el equipo organizador</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 3 -->
+      <div class="tab-panel" id="tab-jovenes" role="tabpanel">
+        <div class="perfil-card">
+          <div>
+            <p class="perfil-numero">03</p>
+            <h3 class="perfil-nombre">Jóvenes y niños</h3>
+            <p class="perfil-desc">Menores de edad aprendiendo a emprender desde temprano.</p>
+          </div>
+          <div class="perfil-requisitos">
+            <h4>Requisitos</h4>
+            <ul>
+              <li>Autorización firmada por padre o madre</li>
+              <li>Acompañamiento de adulto responsable durante toda la feria</li>
+              <li>Los padres responden por ellos ante la organización</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       CRONOGRAMA
+  ══════════════════════════════════════════ -->
+  <section id="cronograma">
+    <div class="container">
+      <div class="cronograma-grid">
+
+        <div class="crono-izq">
+          <span class="label-seccion">El día del evento</span>
+          <h2 class="titulo-seccion">¿Qué va a pasar el 1 de mayo?</h2>
+          <p style="color:var(--text-secondary);font-size:0.95rem;margin-top:0.5rem;">Un día lleno de comunidad, emprendimiento y propósito.</p>
+        </div>
+
+        <div class="crono-der">
+          <div class="crono-lista" id="crono-lista">
+            <!-- Se llena desde cronograma.json -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       DIRECTORIO
+  ══════════════════════════════════════════ -->
+  <section id="directorio">
+    <div class="container">
+
+      <div class="directorio-header">
+        <span class="label-seccion">Emprendedores de la feria</span>
+        <h2 class="titulo-seccion">Directorio</h2>
+      </div>
+
+      <div id="directorio-contenido">
+        <!-- Se llena desde ediciones.json -->
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FORMULARIOS / PARTICIPAR
+  ══════════════════════════════════════════ -->
+  <section id="participar">
+    <div class="container">
+
+      <div class="forms-header">
+        <div>
+          <span class="label-seccion">Inscripciones abiertas</span>
+          <h2 class="titulo-seccion">Únete a la feria</h2>
+        </div>
+        <p style="color:var(--text-secondary);max-width:420px;">Completa el formulario según tu perfil. El equipo revisará tu aplicación y te contactará con los pasos a seguir.</p>
+      </div>
+
+      <p class="forms-nota">Registro abierto 2 meses antes del evento.</p>
+
+      <div class="forms-grid">
+        <div class="form-bloque">
+          <div class="form-bloque-header">
+            <h3>Formulario de participación</h3>
+            <p>Para emprendedores establecidos, por necesidad y jóvenes.</p>
+          </div>
+          <div id="form-aplicacion">
+            <div class="form-placeholder">
+              Formulario próximamente<br/>
+              <small style="font-size:0.8rem;opacity:0.6;margin-top:0.3rem;display:block;">Typeform embed aquí</small>
+            </div>
+          </div>
+        </div>
+        <div class="form-bloque">
+          <div class="form-bloque-header">
+            <h3>Formulario para talleres</h3>
+            <p>¿Quieres dictar un taller el día del evento?</p>
+          </div>
+          <div id="form-talleres">
+            <div class="form-placeholder">
+              Formulario próximamente<br/>
+              <small style="font-size:0.8rem;opacity:0.6;margin-top:0.3rem;display:block;">Typeform embed aquí</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-logo">
+      Emprende<span>·</span>Renacer
+    </div>
+    <div class="footer-center">
+      <p class="footer-fecha" id="footer-fecha">1 de mayo de 2026</p>
+      <p class="footer-org">Frente de Emprendimiento — Tercera Edición</p>
+    </div>
+    <div class="footer-cta">
+      <a href="#participar" class="btn-cta">
+        Inscríbete
+        <span class="btn-arrow">→</span>
+      </a>
+    </div>
+  </footer>
+  <div class="footer-creditos">
+    <span>Creado por <strong>Daniel Mayorga</strong></span>
+    <a href="mailto:danielmayorga.info@gmail.com">danielmayorga.info@gmail.com</a>
+    <a href="https://www.linkedin.com/in/dannielmayorga/" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer-linkedin">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+    </a>
+  </div>
+
+  <!-- Modal directorio -->
+  <div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div>
+          <p class="modal-nombre" id="modal-nombre"></p>
+          <p class="modal-cat"    id="modal-cat"></p>
+        </div>
+        <button class="modal-close" id="modal-close" aria-label="Cerrar">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-contactos" id="modal-contactos"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ── Nav toggle ────────────────────────────────────────────
+    const navLinks  = document.getElementById('nav-links');
+    const navToggle = document.getElementById('nav-toggle');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('abierto'));
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navLinks.classList.remove('abierto'));
+    });
+
+    // ── Tabs perfiles ─────────────────────────────────────────
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected','true');
+        document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+      });
+    });
+
+    // ── Modal directorio ──────────────────────────────────────
+    const modal      = document.getElementById('modal');
+    const modalClose = document.getElementById('modal-close');
+
+    function abrirModal(emp) {
+      document.getElementById('modal-nombre').textContent   = emp.nombre || nombreDeArchivo(emp.archivo || '');
+      document.getElementById('modal-cat').textContent      = emp.categoria || '';
+      document.getElementById('modal-desc').textContent     = emp.descripcion || 'Sin descripción disponible.';
+      const cont = document.getElementById('modal-contactos');
+      cont.innerHTML = '';
+      if (emp.contacto_whatsapp) {
+        const a = document.createElement('a');
+        a.href = 'https://wa.me/' + emp.contacto_whatsapp.replace(/\D/g,'');
+        a.className = 'modal-wa';
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = 'WhatsApp';
+        cont.appendChild(a);
+      }
+      if (emp.contacto_instagram) {
+        const a = document.createElement('a');
+        a.href = 'https://instagram.com/' + emp.contacto_instagram.replace('@','');
+        a.className = 'modal-ig';
+        a.target = '_blank';
+        a.rel = 'noopener';
+        a.textContent = '@' + emp.contacto_instagram.replace('@','');
+        cont.appendChild(a);
+      }
+      modal.classList.add('abierto');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarModal() {
+      modal.classList.remove('abierto');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', cerrarModal);
+    modal.addEventListener('click', e => { if (e.target === modal) cerrarModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
+
+    // ── Helpers ───────────────────────────────────────────────
+    function nombreDeArchivo(archivo) {
+      return archivo.replace(/\.[^.]+$/, '');
+    }
+    function rutaImagen(ed, archivo) {
+      return (ed.carpeta ? ed.carpeta + '/' : '') + archivo;
+    }
+
+    // ── Config ────────────────────────────────────────────────
+    async function cargarConfig() {
+      try {
+        const res    = await fetch('data/config.json');
+        const config = await res.json();
+        if (config.fecha) {
+          const opts = { year:'numeric', month:'long', day:'numeric' };
+          const fecha = new Date(config.fecha + 'T12:00:00');
+          const str   = fecha.toLocaleDateString('es-CO', opts);
+          const el = document.getElementById('hero-fecha');
+          const elF = document.getElementById('footer-fecha');
+          if (el)  el.textContent  = str;
+          if (elF) elF.textContent = str;
+        }
+        if (config.cta_link) {
+          document.querySelectorAll('#hero-cta, .footer-cta a').forEach(a => { a.href = config.cta_link; });
+        }
+      } catch(e) {}
+    }
+
+    // ── Cronograma ────────────────────────────────────────────
+    async function cargarCronograma() {
+      const lista = document.getElementById('crono-lista');
+      if (!lista) return;
+      try {
+        const res   = await fetch('data/cronograma.json');
+        const items = await res.json();
+        lista.innerHTML = items.map(item =>
+          '<div class="crono-item">'
+          + '<span class="crono-hora">' + item.hora + '</span>'
+          + '<span class="crono-actividad">' + item.actividad + '</span>'
+          + '</div>'
+        ).join('');
+      } catch(e) {
+        lista.innerHTML = '<p style="color:var(--text-dim);font-size:0.9rem;">Cronograma por confirmar.</p>';
+      }
+    }
+
+    // ── Directorio ────────────────────────────────────────────
+    async function cargarDirectorio() {
+      const contenedor = document.getElementById('directorio-contenido');
+      if (!contenedor) return;
+      try {
+        const res      = await fetch('data/ediciones.json');
+        const ediciones = await res.json();
+        contenedor.innerHTML = ediciones.map(ed => {
+          const cards = ed.emprendimientos.map((emp, i) => crearCard(ed, emp, i)).join('');
+          return '<div class="edicion-bloque">'
+            + '<p class="edicion-label">Edición ' + ed.año + '</p>'
+            + '<div class="emprendimientos-grid">' + cards + '</div>'
+            + '</div>';
+        }).join('');
+
+        // Eventos de click en cards
+        contenedor.querySelectorAll('.emp-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const [anio, idx] = card.dataset.emp.split('-');
+            const ed  = ediciones.find(e => String(e.año) === anio);
+            const emp = ed && ed.emprendimientos[parseInt(idx)];
+            if (emp) abrirModal(emp);
+          });
+          card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') card.click();
+          });
+        });
+
+        // onerror en imgs
+        contenedor.querySelectorAll('.emp-avatar img').forEach(img => {
+          img.addEventListener('error', () => {
+            img.parentElement.innerHTML = '<div class="emp-avatar-placeholder">✦</div>';
+          });
+        });
+
+      } catch(e) {
+        contenedor.innerHTML = '<p style="padding:2rem;color:var(--text-dim);">No se pudo cargar el directorio.</p>';
+      }
+    }
+
+    function crearCard(ed, emp, i) {
+      const nombre = emp.nombre || nombreDeArchivo(emp.archivo || '');
+      const src    = emp.archivo ? rutaImagen(ed, emp.archivo) : '';
+      const key    = ed.año + '-' + i;
+      const avatar = src
+        ? '<img src="' + src + '" alt="' + nombre + '" loading="lazy" />'
+        : '<div class="emp-avatar-placeholder">✦</div>';
+      const cat = emp.categoria ? '<p class="emp-card-cat">' + emp.categoria + '</p>' : '';
+      return '<div class="emp-card" data-emp="' + key + '" tabindex="0" role="button" aria-label="Ver ' + nombre + '">'
+        + '<div class="emp-avatar">' + avatar + '</div>'
+        + '<p class="emp-card-nombre">' + nombre + '</p>'
+        + cat + '</div>';
+    }
+
+    // ── Carrusel hero ─────────────────────────────────────────
+    async function cargarCarrusel() {
+      const track   = document.getElementById('carrusel-track');
+      const counter = document.getElementById('carrusel-counter');
+      if (!track) return;
+
+      try {
+        const res    = await fetch('data/carrusel.json');
+        const fotos  = await res.json();
+        const total  = fotos.length;
+        let   actual = 0;
+        let   timer;
+
+        track.innerHTML = fotos.map(f =>
+          '<div class="carrusel-slide"><img src="fotos-2025/' + f + '" alt="" loading="lazy" /></div>'
+        ).join('');
+
+        function ir(idx) {
+          actual = (idx + total) % total;
+          track.style.transform = 'translateX(-' + (actual * 100) + '%)';
+          counter.textContent   = (actual + 1) + ' / ' + total;
+        }
+
+        function reiniciarTimer() {
+          clearInterval(timer);
+          timer = setInterval(() => ir(actual + 1), 10000);
+        }
+
+        // Swipe táctil
+        let touchX = 0;
+        track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend',   e => {
+          const diff = touchX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40) { ir(actual + (diff > 0 ? 1 : -1)); reiniciarTimer(); }
+        }, { passive: true });
+
+        ir(0);
+        reiniciarTimer();
+      } catch(e) {}
+    }
+
+    // ── Logo strip ────────────────────────────────────────────
+    async function cargarLogoStrip() {
+      const track = document.getElementById('logo-strip-track');
+      if (!track) return;
+      try {
+        const res       = await fetch('data/ediciones.json');
+        const ediciones = await res.json();
+        const ed        = ediciones[ediciones.length - 1];
+        if (!ed || !ed.emprendimientos) return;
+        const items = [...ed.emprendimientos, ...ed.emprendimientos];
+        track.innerHTML = items.map(emp => {
+          const nombre = emp.nombre || emp.archivo.replace(/\.[^.]+$/, '');
+          const src    = emp.archivo ? (ed.carpeta + '/' + emp.archivo) : '';
+          return '<a href="#directorio" class="logo-strip-item" title="' + nombre + '">'
+            + '<div class="logo-strip-avatar">'
+            + (src ? '<img src="' + src + '" alt="' + nombre + '" loading="lazy" />' : '<span class="logo-strip-placeholder">✦</span>')
+            + '</div>'
+            + '</a>';
+        }).join('');
+      } catch(e) {}
+    }
+
+    cargarConfig();
+    cargarCronograma();
+    cargarDirectorio();
+    cargarCarrusel();
+    cargarLogoStrip();
+  </script>
+
+</body>
+</html>
