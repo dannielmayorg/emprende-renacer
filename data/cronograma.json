@@ -1,8 +1,18 @@
 [
-  { "hora": "9:00 AM",  "actividad": "Apertura de puertas" },
-  { "hora": "9:30 AM",  "actividad": "Bienvenida oficial" },
-  { "hora": "10:00 AM", "actividad": "Taller — por confirmar" },
-  { "hora": "12:00 PM", "actividad": "Almuerzo y conexión" },
-  { "hora": "2:00 PM",  "actividad": "Taller — por confirmar" },
-  { "hora": "4:00 PM",  "actividad": "Cierre y oración" }
+  { "hora": "9:50 AM",  "actividad": "Oración de apertura" },
+  { "hora": "10:00 AM", "actividad": "Apertura oficial de la feria" },
+  { "hora": "10:05 AM", "actividad": "Saludo y recomendaciones" },
+  { "hora": "10:10 AM", "actividad": "Música + proyección de imágenes de los emprendedores" },
+  { "hora": "10:30 AM", "actividad": "Mini-cata de Café — Benema Café" },
+  { "hora": "11:00 AM", "actividad": "Anuncio de la Rifa y dinámica de sellos" },
+  { "hora": "11:30 AM", "actividad": "Mini-taller de Lettering" },
+  { "hora": "12:10 PM", "actividad": "Presentación musical de Manuela" },
+  { "hora": "12:20 PM", "actividad": "Música + visita a stands y Venta de Garaje" },
+  { "hora": "1:00 PM",  "actividad": "Mini-taller de Maquillaje Express" },
+  { "hora": "1:40 PM",  "actividad": "Dinámica: Adivina el precio real" },
+  { "hora": "2:00 PM",  "actividad": "Música + recordatorio de rifa y sellos" },
+  { "hora": "2:30 PM",  "actividad": "Actividad especial en zona de comidas" },
+  { "hora": "3:20 PM",  "actividad": "Presentación musical — alumno Escuela de música" },
+  { "hora": "4:30 PM",  "actividad": "Cierre de ventas y sorteo final" },
+  { "hora": "5:00 PM",  "actividad": "Agradecimiento y despedida" }
 ]

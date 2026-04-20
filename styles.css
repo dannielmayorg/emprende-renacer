@@ -650,7 +650,7 @@ ul { list-style: none; }
   color: #fff;
 }
 .tab-panel { display: none; }
-.tab-panel.activo { display: block; }
+.tab-panel.active { display: block; }
 
 .perfil-card {
   background: var(--bg-base);

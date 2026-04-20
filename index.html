@@ -55,8 +55,8 @@
           <h1 class="hero-titulo"><span class="logo-mark logo-mark-hero">Emprende<span class="logo-dot logo-dot-hero">·</span>Renacer</span></h1>
           <p class="hero-fecha-text" id="hero-fecha">1 de mayo de 2026</p>
           <div class="hero-cta-wrap">
-            <a href="#participar" class="btn-cta" id="hero-cta">
-              Quiero participar
+            <a href="https://lu.ma/58rbu5xv" class="btn-cta" id="hero-cta" target="_blank" rel="noopener">
+              Quiero asistir
               <span class="btn-arrow">→</span>
             </a>
             <a href="#mision" class="btn-outline">Conocer más</a>
@@ -453,7 +453,11 @@
           if (elF) elF.textContent = str;
         }
         if (config.cta_link) {
-          document.querySelectorAll('#hero-cta, .footer-cta a').forEach(a => { a.href = config.cta_link; });
+          document.querySelectorAll('#hero-cta, .footer-cta a').forEach(a => { a.href = config.cta_link; a.target = '_blank'; a.rel = 'noopener'; });
+        }
+        if (config.cta_texto) {
+          const el = document.getElementById('hero-cta');
+          if (el) el.firstChild.textContent = config.cta_texto + ' ';
         }
       } catch(e) {}
     }
