@@ -455,6 +455,194 @@ ul { list-style: none; }
 }
 
 /* ══════════════════════════════════════════════════════════
+   RIFA — cards strip debajo del logo strip
+══════════════════════════════════════════════════════════ */
+#rifa-strip {
+  background: var(--bg-base);
+  padding: 2.5rem 2rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.rifa-strip-label {
+  font-family: var(--font-ui);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--naranja);
+  display: block;
+  margin-bottom: 1.2rem;
+}
+.rifa-track-wrap {
+  position: relative;
+}
+.rifa-track {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.rifa-track::-webkit-scrollbar { display: none; }
+
+.rifa-card {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  width: min(460px, 85vw);
+  background: linear-gradient(135deg, var(--terracota) 0%, var(--terracota-dark) 100%);
+  border-radius: 16px;
+  padding: 2rem 2rem 1.8rem;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.rifa-card::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 180px; height: 180px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.rifa-card::after {
+  content: '';
+  position: absolute;
+  bottom: -50px; left: -20px;
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.rifa-card-icon {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+.rifa-card-title {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: 0.4rem;
+}
+.rifa-card-sub {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 1.4rem;
+  line-height: 1.5;
+}
+.rifa-pasos {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.4rem;
+  position: relative;
+  z-index: 1;
+}
+.rifa-paso {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: rgba(255,255,255,0.92);
+}
+.rifa-paso-num {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.rifa-cta-text {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.65);
+  border-top: 1px solid rgba(255,255,255,0.15);
+  padding-top: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card "más info" placeholder */
+.rifa-card-plain {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  width: min(300px, 70vw);
+  background: var(--bg-section);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.rifa-card-plain-icon { font-size: 1.6rem; }
+.rifa-card-plain-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+.rifa-card-plain-text {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.rifa-card-plain .btn-cta {
+  margin-top: 0.8rem;
+  font-size: 0.82rem;
+  padding: 0.55rem 1.1rem;
+}
+
+/* ══════════════════════════════════════════════════════════
+   FORMULARIO — botón popup Typeform
+══════════════════════════════════════════════════════════ */
+.form-btn-wrap {
+  padding: 2.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+.btn-typeform {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--terracota);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 0.75rem 1.6rem;
+  font-family: var(--font-ui);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.18s, box-shadow 0.2s;
+  box-shadow: 0 2px 12px rgba(78,125,166,0.3);
+  letter-spacing: 0.01em;
+}
+.btn-typeform:hover {
+  background: var(--terracota-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(78,125,166,0.35);
+}
+.form-btn-hint {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* ══════════════════════════════════════════════════════════
    MISIÓN
 ══════════════════════════════════════════════════════════ */
 /* ══════════════════════════════════════════════════════════
@@ -726,11 +914,46 @@ ul { list-style: none; }
   gap: 5rem;
   align-items: start;
 }
-.cronograma-fecha {
-  font-size: 0.9rem;
-  color: var(--text-dim);
-  margin-top: 0.3rem;
+
+/* Items del cronograma (renderizados desde JSON) */
+.crono-lista { display: flex; flex-direction: column; }
+
+.crono-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 1.2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--terracota-bg);
+  align-items: center;
+  transition: background 0.15s, padding-left 0.15s;
+  border-radius: 6px;
 }
+.crono-item:first-child {
+  border-top: 2px solid var(--terracota);
+}
+.crono-item:last-child {
+  border-bottom: 2px solid var(--terracota);
+}
+.crono-item:hover {
+  background: var(--terracota-bg);
+  padding-left: 0.7rem;
+}
+.crono-hora {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--terracota);
+  white-space: nowrap;
+}
+.crono-actividad {
+  font-size: 0.97rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+/* Legacy timeline (por si acaso) */
 .timeline { display: flex; flex-direction: column; }
 .timeline-item {
   display: grid;
@@ -739,29 +962,9 @@ ul { list-style: none; }
   padding: 1.2rem 0;
   border-bottom: 1px solid var(--border-dim);
   align-items: center;
-  transition: background 0.15s;
-  border-radius: 6px;
 }
-.timeline-item:first-child { border-top: 1px solid var(--border-dim); }
-.timeline-item:hover { background: var(--bg-section); padding-left: 0.8rem; margin-left: -0.8rem; }
-.timeline-hora {
-  font-family: var(--font-ui);
-  font-size: 0.78rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--terracota);
-}
-.timeline-actividad {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-primary);
-}
-.timeline-vacio {
-  font-size: 0.95rem;
-  font-style: italic;
-  color: var(--text-dim);
-  padding: 2rem 0;
-}
+.timeline-hora { font-size: 0.78rem; font-weight: 600; color: var(--terracota); }
+.timeline-actividad { font-size: 1rem; font-weight: 500; color: var(--text-primary); }
 
 /* ══════════════════════════════════════════════════════════
    DIRECTORIO

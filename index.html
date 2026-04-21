@@ -79,6 +79,59 @@
   </div>
 
   <!-- ══════════════════════════════════════════
+       RIFA — cards strip
+  ══════════════════════════════════════════ -->
+  <section id="rifa-strip">
+    <span class="rifa-strip-label">Actividades del día</span>
+    <div class="rifa-track-wrap">
+      <div class="rifa-track">
+
+        <!-- Card 1: Rifa -->
+        <div class="rifa-card">
+          <span class="rifa-card-icon">🎟️</span>
+          <div class="rifa-card-title">Participa por una rifa</div>
+          <p class="rifa-card-sub">¡Queremos premiarte por tus compras!</p>
+          <div class="rifa-pasos">
+            <div class="rifa-paso">
+              <span class="rifa-paso-num">1</span>
+              <span>Reclama tu cartón al entrar a la feria</span>
+            </div>
+            <div class="rifa-paso">
+              <span class="rifa-paso-num">2</span>
+              <span>Completa 5 sellos o firmas de los emprendedores</span>
+            </div>
+            <div class="rifa-paso">
+              <span class="rifa-paso-num">3</span>
+              <span>Regístrate en el link del evento en Lu.ma</span>
+            </div>
+            <div class="rifa-paso">
+              <span class="rifa-paso-num">4</span>
+              <span>Únete al canal de WhatsApp de la feria</span>
+            </div>
+          </div>
+          <p class="rifa-cta-text">¡Reclama tu ticket y participa en la rifa de premios por tus compras! 🛒</p>
+        </div>
+
+        <!-- Card 2: Talleres -->
+        <div class="rifa-card-plain">
+          <span class="rifa-card-plain-icon">🎨</span>
+          <div class="rifa-card-plain-title">Mini-talleres en vivo</div>
+          <p class="rifa-card-plain-text">Lettering, Maquillaje Express, Mini-cata de Café y más. ¡Sin costo adicional!</p>
+          <a href="#cronograma" class="btn-cta">Ver cronograma <span class="btn-arrow">→</span></a>
+        </div>
+
+        <!-- Card 3: Stand solidario -->
+        <div class="rifa-card-plain">
+          <span class="rifa-card-plain-icon">🤝</span>
+          <div class="rifa-card-plain-title">Stand solidario</div>
+          <p class="rifa-card-plain-text">Gran venta de garaje. Todo lo recaudado va a apoyar a una familia de nuestra congregación.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════
        INFO DEL EVENTO
   ══════════════════════════════════════════ -->
   <section id="info-evento">
@@ -458,6 +511,47 @@
         if (config.cta_texto) {
           const el = document.getElementById('hero-cta');
           if (el) el.firstChild.textContent = config.cta_texto + ' ';
+        }
+
+        // Typeform popups — solo si hay IDs configurados
+        let tfLoaded = false;
+        function cargarTFScript() {
+          if (tfLoaded) return;
+          tfLoaded = true;
+          const s = document.createElement('script');
+          s.src = '//embed.typeform.com/next/embed.js';
+          document.body.appendChild(s);
+        }
+
+        const aplId = config.typeform_aplicacion;
+        const talId = config.typeform_talleres;
+
+        if (aplId) {
+          const el = document.getElementById('form-aplicacion');
+          if (el) {
+            el.innerHTML =
+              '<div class="form-btn-wrap">'
+              + '<button data-tf-popup="' + aplId + '" data-tf-opacity="100" data-tf-size="100" class="btn-typeform">'
+              + '📋 Abrir formulario de aplicación'
+              + '</button>'
+              + '<p class="form-btn-hint">Se abre un formulario en una ventana emergente.</p>'
+              + '</div>';
+          }
+          cargarTFScript();
+        }
+
+        if (talId) {
+          const el = document.getElementById('form-talleres');
+          if (el) {
+            el.innerHTML =
+              '<div class="form-btn-wrap">'
+              + '<button data-tf-popup="' + talId + '" data-tf-opacity="100" data-tf-size="100" class="btn-typeform">'
+              + '🎨 Abrir formulario de talleres'
+              + '</button>'
+              + '<p class="form-btn-hint">Se abre un formulario en una ventana emergente.</p>'
+              + '</div>';
+          }
+          cargarTFScript();
         }
       } catch(e) {}
     }

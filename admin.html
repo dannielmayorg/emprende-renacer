@@ -519,6 +519,47 @@
     }
 
     /* ── DIRECTORIO ────────────────────────────────── */
+    .edicion-bloque-admin {
+      margin-bottom: 24px;
+    }
+
+    .edicion-header-admin {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--azul-light);
+    }
+
+    .edicion-titulo-admin {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--texto);
+    }
+
+    .edicion-year-badge {
+      font-size: 11px;
+      background: var(--azul-light);
+      color: var(--azul-dark);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    .btn-del-edicion {
+      background: none;
+      border: 1px solid #FCA5A5;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 12px;
+      color: var(--rojo);
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .12s;
+    }
+    .btn-del-edicion:hover { background: #FEE2E2; }
+
     .emp-list { display: flex; flex-direction: column; gap: 8px; }
 
     .emp-item {
@@ -591,6 +632,22 @@
       color: var(--gris);
       text-transform: uppercase;
       letter-spacing: .04em;
+    }
+
+    /* Nuevo emprendimiento / nueva edición */
+    .nueva-edicion-form {
+      border: 1px dashed var(--azul);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 16px;
+      background: var(--azul-light);
+    }
+
+    .nueva-edicion-form h4 {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--azul-dark);
     }
 
     /* ── INFO BOX ──────────────────────────────────── */
@@ -822,11 +879,27 @@
     <!-- ── TAB: DIRECTORIO ─────────────────────────── -->
     <div id="tab-directorio" class="tab-panel">
       <div class="section-title">Directorio de emprendimientos</div>
-      <div class="section-desc">Completa la descripción y datos de contacto de cada emprendimiento.</div>
+      <div class="section-desc">Agrega, edita o elimina emprendimientos por edición/año. Los logos se suben a R2.</div>
 
       <div id="dir-loading" class="loading-msg">Cargando…</div>
       <div id="dir-form" style="display:none;">
-        <div class="emp-list" id="emp-list"></div>
+        <div id="ediciones-admin"></div>
+
+        <!-- Nueva edición -->
+        <div class="card" style="margin-top:8px;">
+          <div style="font-size:14px;font-weight:700;margin-bottom:14px;color:var(--texto);">➕ Agregar nueva edición (año)</div>
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="nueva-ed-anio">Año</label>
+              <input type="text" id="nueva-ed-anio" placeholder="2026" />
+            </div>
+            <div class="field">
+              <label class="field-label" for="nueva-ed-carpeta">URL base de logos en R2</label>
+              <input type="url" id="nueva-ed-carpeta" placeholder="https://pub-d85....r2.dev/logos-2026" />
+            </div>
+          </div>
+          <button class="btn-add" onclick="agregarEdicion()" style="margin-top:4px;">+ Crear edición</button>
+        </div>
       </div>
     </div>
 
@@ -1145,66 +1218,174 @@ function leerFormularios() {
 function renderDirectorio(ediciones) {
   document.getElementById('dir-loading').style.display = 'none';
   document.getElementById('dir-form').style.display = 'block';
-  const lista = document.getElementById('emp-list');
-  lista.innerHTML = '';
+  renderEdicionesAdmin(ediciones);
+}
+
+function renderEdicionesAdmin(ediciones) {
+  const contenedor = document.getElementById('ediciones-admin');
+  contenedor.innerHTML = '';
 
   ediciones.forEach((ed, ei) => {
-    ed.emprendimientos.forEach((emp, i) => {
-      const nombre = emp.nombre || emp.archivo.replace(/\.[^.]+$/, '');
-      const logoUrl = ed.carpeta + '/' + emp.archivo;
-      const div = document.createElement('div');
-      div.className = 'emp-item';
-      div.dataset.edIndex = ei;
-      div.dataset.empIndex = i;
+    const bloque = document.createElement('div');
+    bloque.className = 'edicion-bloque-admin card';
+    bloque.dataset.edIndex = ei;
 
-      div.innerHTML =
-        '<div class="emp-header" onclick="toggleEmp(this.parentElement)">' +
-          '<img class="emp-logo" src="' + esc(logoUrl) + '" alt="" onerror="this.style.opacity=\'0\'" />' +
-          '<span class="emp-name">' + esc(nombre) + '</span>' +
-          (emp.categoria ? '<span class="emp-cat-badge">' + esc(emp.categoria) + '</span>' : '') +
-          '<span class="emp-arrow">▼</span>' +
+    const empHtml = ed.emprendimientos.map((emp, i) => crearEmpItemHtml(ed, emp, ei, i)).join('');
+
+    bloque.innerHTML =
+      '<div class="edicion-header-admin">' +
+        '<div style="display:flex;align-items:center;gap:10px;">' +
+          '<span class="edicion-titulo-admin">Edición ' + esc(String(ed.año)) + '</span>' +
+          '<span class="edicion-year-badge">' + ed.emprendimientos.length + ' emprendimientos</span>' +
         '</div>' +
-        '<div class="emp-body">' +
-          '<div class="emp-fields">' +
-            '<div class="emp-field">' +
-              '<label>Categoría</label>' +
-              '<input type="text" class="emp-categoria" value="' + esc(emp.categoria) + '" placeholder="Ej: Gastronomía, Moda, Arte…" />' +
+        '<button class="btn-del-edicion" onclick="eliminarEdicion(' + ei + ')">Eliminar edición</button>' +
+      '</div>' +
+      '<div class="emp-list" id="emp-list-' + ei + '">' + empHtml + '</div>' +
+      // Formulario para agregar nuevo emprendimiento
+      '<div style="margin-top:12px;">' +
+        '<button class="btn-add" onclick="mostrarFormNuevoEmp(' + ei + ')">+ Agregar emprendimiento</button>' +
+        '<div id="nuevo-emp-form-' + ei + '" style="display:none;" class="nueva-edicion-form">' +
+          '<h4>Nuevo emprendimiento</h4>' +
+          '<div class="field">' +
+            '<label class="field-label">Nombre del archivo en R2 <span style="font-weight:400;color:var(--gris);">(ej: Mi Negocio.jpeg)</span></label>' +
+            '<input type="text" id="nuevo-emp-archivo-' + ei + '" placeholder="Nombre del logo.jpeg" />' +
+            '<p class="field-hint">Debe coincidir exactamente con el archivo subido en Cloudflare R2 → logos/</p>' +
+          '</div>' +
+          '<div class="field-row">' +
+            '<div class="field">' +
+              '<label class="field-label">Categoría</label>' +
+              '<input type="text" id="nuevo-emp-cat-' + ei + '" placeholder="Gastronomía, Moda…" />' +
             '</div>' +
-            '<div class="emp-field">' +
-              '<label>Descripción</label>' +
-              '<textarea class="emp-descripcion" placeholder="Cuéntanos qué ofrece este emprendimiento…">' + esc(emp.descripcion) + '</textarea>' +
-            '</div>' +
-            '<div class="field-row">' +
-              '<div class="emp-field">' +
-                '<label>WhatsApp</label>' +
-                '<input type="text" class="emp-whatsapp" value="' + esc(emp.contacto_whatsapp) + '" placeholder="573001234567" />' +
-              '</div>' +
-              '<div class="emp-field">' +
-                '<label>Instagram</label>' +
-                '<input type="text" class="emp-instagram" value="' + esc(emp.contacto_instagram) + '" placeholder="@mi_emprendimiento" />' +
-              '</div>' +
+            '<div class="field">' +
+              '<label class="field-label">WhatsApp</label>' +
+              '<input type="text" id="nuevo-emp-wa-' + ei + '" placeholder="573001234567" />' +
             '</div>' +
           '</div>' +
-        '</div>';
+          '<div class="field">' +
+            '<label class="field-label">Descripción</label>' +
+            '<textarea id="nuevo-emp-desc-' + ei + '" placeholder="¿Qué ofrece este emprendimiento?"></textarea>' +
+          '</div>' +
+          '<div style="display:flex;gap:8px;margin-top:4px;">' +
+            '<button class="btn-add" onclick="confirmarNuevoEmp(' + ei + ')">✓ Agregar</button>' +
+            '<button class="btn-del" onclick="document.getElementById(\'nuevo-emp-form-' + ei + '\').style.display=\'none\'" style="width:auto;padding:8px 14px;font-size:13px;">Cancelar</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
 
-      lista.appendChild(div);
-    });
+    contenedor.appendChild(bloque);
   });
 }
 
-function toggleEmp(el) {
-  el.classList.toggle('open');
+function crearEmpItemHtml(ed, emp, ei, i) {
+  const nombre  = emp.nombre || emp.archivo.replace(/\.[^.]+$/, '');
+  const logoUrl = ed.carpeta + '/' + emp.archivo;
+  return '<div class="emp-item" data-ed-index="' + ei + '" data-emp-index="' + i + '">' +
+    '<div class="emp-header" onclick="toggleEmp(this.parentElement)">' +
+      '<img class="emp-logo" src="' + esc(logoUrl) + '" alt="" onerror="this.style.opacity=\'0.2\'" />' +
+      '<span class="emp-name">' + esc(nombre) + '</span>' +
+      (emp.categoria ? '<span class="emp-cat-badge">' + esc(emp.categoria) + '</span>' : '') +
+      '<button class="btn-del" onclick="event.stopPropagation();eliminarEmp(this)" title="Eliminar emprendimiento" style="margin-left:4px;">✕</button>' +
+      '<span class="emp-arrow">▼</span>' +
+    '</div>' +
+    '<div class="emp-body">' +
+      '<div class="emp-fields">' +
+        '<div class="emp-field">' +
+          '<label>Categoría</label>' +
+          '<input type="text" class="emp-categoria" value="' + esc(emp.categoria) + '" placeholder="Ej: Gastronomía, Moda, Arte…" />' +
+        '</div>' +
+        '<div class="emp-field">' +
+          '<label>Descripción</label>' +
+          '<textarea class="emp-descripcion" placeholder="Cuéntanos qué ofrece este emprendimiento…">' + esc(emp.descripcion) + '</textarea>' +
+        '</div>' +
+        '<div class="field-row">' +
+          '<div class="emp-field">' +
+            '<label>WhatsApp</label>' +
+            '<input type="text" class="emp-whatsapp" value="' + esc(emp.contacto_whatsapp) + '" placeholder="573001234567" />' +
+          '</div>' +
+          '<div class="emp-field">' +
+            '<label>Instagram</label>' +
+            '<input type="text" class="emp-instagram" value="' + esc(emp.contacto_instagram) + '" placeholder="@mi_emprendimiento" />' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function toggleEmp(el) { el.classList.toggle('open'); }
+
+function eliminarEmp(btn) {
+  if (!confirm('¿Eliminar este emprendimiento del directorio?')) return;
+  btn.closest('.emp-item').remove();
+}
+
+function eliminarEdicion(ei) {
+  if (!confirm('¿Eliminar toda esta edición y sus emprendimientos? Esta acción no se puede deshacer hasta guardar.')) return;
+  document.querySelector('.edicion-bloque-admin[data-ed-index="' + ei + '"]').remove();
+}
+
+function mostrarFormNuevoEmp(ei) {
+  document.getElementById('nuevo-emp-form-' + ei).style.display = 'block';
+}
+
+function confirmarNuevoEmp(ei) {
+  const archivo = document.getElementById('nuevo-emp-archivo-' + ei).value.trim();
+  if (!archivo) { alert('El nombre del archivo es obligatorio.'); return; }
+  const cat  = document.getElementById('nuevo-emp-cat-' + ei).value.trim();
+  const desc = document.getElementById('nuevo-emp-desc-' + ei).value.trim();
+  const wa   = document.getElementById('nuevo-emp-wa-' + ei).value.trim();
+
+  // Construir edicion temp para obtener carpeta
+  const bloque = document.querySelector('.edicion-bloque-admin[data-ed-index="' + ei + '"]');
+  const edIndex = parseInt(bloque.dataset.edIndex);
+  const ed = datosCache['ediciones'][edIndex];
+
+  const nuevoEmp = { archivo, categoria: cat, descripcion: desc, contacto_whatsapp: wa, contacto_instagram: '' };
+  const lista = document.getElementById('emp-list-' + ei);
+  const i = lista.querySelectorAll('.emp-item').length;
+  lista.insertAdjacentHTML('beforeend', crearEmpItemHtml(ed, nuevoEmp, edIndex, i));
+
+  // Limpiar form
+  document.getElementById('nuevo-emp-archivo-' + ei).value = '';
+  document.getElementById('nuevo-emp-cat-'     + ei).value = '';
+  document.getElementById('nuevo-emp-desc-'    + ei).value = '';
+  document.getElementById('nuevo-emp-wa-'      + ei).value = '';
+  document.getElementById('nuevo-emp-form-'    + ei).style.display = 'none';
+}
+
+function agregarEdicion() {
+  const anio    = document.getElementById('nueva-ed-anio').value.trim();
+  const carpeta = document.getElementById('nueva-ed-carpeta').value.trim();
+  if (!anio || !carpeta) { alert('Rellena el año y la URL base de R2.'); return; }
+
+  const nuevaEd = { año: parseInt(anio) || anio, carpeta, emprendimientos: [] };
+  datosCache['ediciones'] = datosCache['ediciones'] || [];
+  datosCache['ediciones'].push(nuevaEd);
+
+  renderEdicionesAdmin(datosCache['ediciones']);
+  document.getElementById('nueva-ed-anio').value    = '';
+  document.getElementById('nueva-ed-carpeta').value = '';
 }
 
 function leerDirectorio() {
-  const ediciones = JSON.parse(JSON.stringify(datosCache['ediciones'])); // deep copy
-  document.querySelectorAll('.emp-item').forEach(item => {
-    const ei = parseInt(item.dataset.edIndex);
-    const i  = parseInt(item.dataset.empIndex);
-    ediciones[ei].emprendimientos[i].categoria          = item.querySelector('.emp-categoria').value.trim();
-    ediciones[ei].emprendimientos[i].descripcion        = item.querySelector('.emp-descripcion').value.trim();
-    ediciones[ei].emprendimientos[i].contacto_whatsapp  = item.querySelector('.emp-whatsapp').value.trim();
-    ediciones[ei].emprendimientos[i].contacto_instagram = item.querySelector('.emp-instagram').value.trim();
+  const ediciones = [];
+  document.querySelectorAll('.edicion-bloque-admin').forEach((bloque, ei) => {
+    const edIndex = parseInt(bloque.dataset.edIndex);
+    const edOrig  = datosCache['ediciones'][edIndex] || {};
+    const emprendimientos = [];
+    bloque.querySelectorAll('.emp-item').forEach(item => {
+      const eei = parseInt(item.dataset.edIndex);
+      const i   = parseInt(item.dataset.empIndex);
+      const orig = (datosCache['ediciones'][eei] || {}).emprendimientos?.[i] || {};
+      emprendimientos.push({
+        archivo:             orig.archivo || '',
+        categoria:           item.querySelector('.emp-categoria')?.value.trim() || '',
+        descripcion:         item.querySelector('.emp-descripcion')?.value.trim() || '',
+        contacto_whatsapp:   item.querySelector('.emp-whatsapp')?.value.trim()   || '',
+        contacto_instagram:  item.querySelector('.emp-instagram')?.value.trim()  || ''
+      });
+    });
+    ediciones.push({ año: edOrig.año, carpeta: edOrig.carpeta, emprendimientos });
   });
   return ediciones;
 }
