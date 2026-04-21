@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Admin — Emprende·Renacer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --azul:       #4E7DA6;
+      --azul-dark:  #2F5F85;
+      --azul-light: #EEF4FA;
+      --naranja:    #D4622A;
+      --gris:       #6B7280;
+      --gris-light: #F3F4F6;
+      --borde:      #E5E7EB;
+      --texto:      #111827;
+      --rojo:       #DC2626;
+      --verde:      #16A34A;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F9FAFB;
+      color: var(--texto);
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN ─────────────────────────────────────── */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--azul-light) 0%, #fff 100%);
+    }
+
+    .login-card {
+      background: #fff;
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 24px rgba(78,125,166,0.10);
+      text-align: center;
+    }
+
+    .login-logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--texto);
+      margin-bottom: 4px;
+    }
+
+    .login-logo span { color: var(--naranja); }
+
+    .login-subtitle {
+      font-size: 13px;
+      color: var(--gris);
+      margin-bottom: 32px;
+    }
+
+    .login-label {
+      display: block;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--texto);
+      margin-bottom: 8px;
+    }
+
+    .login-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .15s;
+      margin-bottom: 20px;
+    }
+
+    .login-input:focus { border-color: var(--azul); }
+
+    .login-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--azul);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .15s;
+      font-family: inherit;
+    }
+
+    .login-btn:hover { background: var(--azul-dark); }
+
+    .login-error {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--rojo);
+      display: none;
+    }
+
+    /* ── PANEL PRINCIPAL ───────────────────────────── */
+    #admin-panel { display: none; min-height: 100vh; }
+
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid var(--borde);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-logo {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .topbar-logo span { color: var(--naranja); }
+
+    .topbar-badge {
+      font-size: 11px;
+      font-weight: 600;
+      background: var(--azul-light);
+      color: var(--azul-dark);
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-left: 10px;
+    }
+
+    .topbar-actions { display: flex; gap: 10px; align-items: center; }
+
+    .btn-link {
+      padding: 7px 14px;
+      border: 1px solid var(--borde);
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      background: #fff;
+      color: var(--texto);
+      text-decoration: none;
+      font-family: inherit;
+      transition: background .15s;
+    }
+
+    .btn-link:hover { background: var(--gris-light); }
+
+    .btn-salir {
+      padding: 7px 14px;
+      border: none;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      background: var(--gris-light);
+      color: var(--gris);
+      font-family: inherit;
+      transition: background .15s;
+    }
+
+    .btn-salir:hover { background: #E5E7EB; }
+
+    /* ── TABS ──────────────────────────────────────── */
+    .tabs-bar {
+      background: #fff;
+      border-bottom: 1px solid var(--borde);
+      display: flex;
+      gap: 0;
+      padding: 0 24px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 14px 20px;
+      border: none;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gris);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      font-family: inherit;
+      transition: color .15s, border-color .15s;
+    }
+
+    .tab-btn.active {
+      color: var(--azul);
+      border-bottom-color: var(--azul);
+      font-weight: 600;
+    }
+
+    .tab-btn:hover:not(.active) { color: var(--texto); }
+
+    /* ── CONTENT ───────────────────────────────────── */
+    .content { max-width: 860px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      color: var(--gris);
+      margin-bottom: 28px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    /* ── FORM FIELDS ───────────────────────────────── */
+    .field { margin-bottom: 20px; }
+    .field:last-child { margin-bottom: 0; }
+
+    label.field-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 7px;
+      color: var(--texto);
+    }
+
+    .field-hint {
+      font-size: 12px;
+      color: var(--gris);
+      margin-top: 5px;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    input[type="date"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--texto);
+      background: #fff;
+      outline: none;
+      transition: border-color .15s;
+    }
+
+    input[type="text"]:focus,
+    input[type="url"]:focus,
+    input[type="date"]:focus,
+    textarea:focus,
+    select:focus { border-color: var(--azul); }
+
+    textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ── BOTÓN GUARDAR ─────────────────────────────── */
+    .save-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: #fff;
+      border-top: 1px solid var(--borde);
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 14px;
+      z-index: 50;
+    }
+
+    .save-status { font-size: 13px; color: var(--gris); }
+    .save-status.ok  { color: var(--verde); font-weight: 600; }
+    .save-status.err { color: var(--rojo);  font-weight: 600; }
+
+    .btn-guardar {
+      padding: 11px 28px;
+      background: var(--azul);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .15s, opacity .15s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-guardar:hover { background: var(--azul-dark); }
+    .btn-guardar:disabled { opacity: .6; cursor: not-allowed; }
+
+    /* ── CRONOGRAMA TABLE ──────────────────────────── */
+    .crono-tabla { width: 100%; border-collapse: collapse; }
+
+    .crono-tabla th {
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gris);
+      padding: 0 10px 10px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .crono-tabla td { padding: 5px 5px; }
+
+    .crono-tabla td:last-child { width: 44px; text-align: center; }
+
+    .crono-tabla input[type="text"] {
+      padding: 8px 10px;
+      font-size: 14px;
+    }
+
+    .btn-del {
+      background: none;
+      border: 1px solid var(--borde);
+      border-radius: 6px;
+      width: 34px; height: 34px;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--gris);
+      transition: background .12s, color .12s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+    }
+
+    .btn-del:hover { background: #FEE2E2; border-color: #FCA5A5; color: var(--rojo); }
+
+    .btn-add {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 14px;
+      padding: 8px 16px;
+      background: var(--azul-light);
+      color: var(--azul-dark);
+      border: 1px solid #C3D9EC;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .12s;
+    }
+
+    .btn-add:hover { background: #D9EAF5; }
+
+    /* ── CARRUSEL LIST ─────────────────────────────── */
+    .foto-lista { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+
+    .foto-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gris-light);
+      border-radius: 8px;
+      padding: 8px 12px;
+    }
+
+    .foto-thumb {
+      width: 52px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 5px;
+      background: #E5E7EB;
+      flex-shrink: 0;
+    }
+
+    .foto-thumb-placeholder {
+      width: 52px;
+      height: 40px;
+      border-radius: 5px;
+      background: #E5E7EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .foto-url {
+      flex: 1;
+      font-size: 12px;
+      color: var(--gris);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .add-url-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .add-url-row input { flex: 1; }
+
+    .btn-add-url {
+      padding: 10px 18px;
+      background: var(--azul);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background .12s;
+    }
+
+    .btn-add-url:hover { background: var(--azul-dark); }
+
+    .foto-counter {
+      font-size: 13px;
+      color: var(--gris);
+      margin-bottom: 12px;
+    }
+
+    /* ── TOGGLES ───────────────────────────────────── */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .toggle-row:last-of-type { border-bottom: none; }
+
+    .toggle-info strong { font-size: 14px; font-weight: 600; display: block; margin-bottom: 2px; }
+    .toggle-info span   { font-size: 12px; color: var(--gris); }
+
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .toggle input { opacity: 0; width: 0; height: 0; }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      background: #D1D5DB;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .toggle-slider::before {
+      content: '';
+      position: absolute;
+      width: 18px; height: 18px;
+      left: 3px; bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: transform .2s;
+    }
+
+    .toggle input:checked + .toggle-slider { background: var(--azul); }
+    .toggle input:checked + .toggle-slider::before { transform: translateX(20px); }
+
+    .typeform-id-row {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 12px;
+      padding: 12px;
+      background: var(--gris-light);
+      border-radius: 8px;
+    }
+
+    .typeform-id-row label {
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .typeform-id-row input { margin-bottom: 0; flex: 1; }
+
+    .typeform-preview {
+      font-size: 12px;
+      color: var(--azul);
+      margin-top: 6px;
+      padding: 0 12px;
+    }
+
+    /* ── DIRECTORIO ────────────────────────────────── */
+    .emp-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .emp-item {
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+    }
+
+    .emp-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      cursor: pointer;
+      user-select: none;
+      transition: background .12s;
+    }
+
+    .emp-header:hover { background: var(--gris-light); }
+
+    .emp-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #E5E7EB;
+      flex-shrink: 0;
+    }
+
+    .emp-name {
+      font-size: 14px;
+      font-weight: 600;
+      flex: 1;
+    }
+
+    .emp-cat-badge {
+      font-size: 11px;
+      background: var(--azul-light);
+      color: var(--azul-dark);
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .emp-arrow {
+      font-size: 12px;
+      color: var(--gris);
+      transition: transform .2s;
+    }
+
+    .emp-item.open .emp-arrow { transform: rotate(180deg); }
+
+    .emp-body {
+      display: none;
+      padding: 16px;
+      border-top: 1px solid var(--borde);
+      background: #FAFAFA;
+    }
+
+    .emp-item.open .emp-body { display: block; }
+
+    .emp-fields { display: grid; gap: 12px; }
+
+    .emp-field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    /* ── INFO BOX ──────────────────────────────────── */
+    .info-box {
+      background: var(--azul-light);
+      border: 1px solid #C3D9EC;
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--azul-dark);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .info-box strong { font-weight: 700; }
+
+    .info-box ol { margin: 8px 0 0 18px; }
+    .info-box li { margin-bottom: 4px; }
+
+    /* ── LOADING ───────────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin .6s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-msg {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--gris);
+      font-size: 14px;
+    }
+
+    /* ── RESPONSIVE ────────────────────────────────── */
+    @media (max-width: 600px) {
+      .field-row { grid-template-columns: 1fr; }
+      .topbar-badge { display: none; }
+      .login-card { margin: 20px; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ LOGIN ═══════════════════════════════════════════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Emprende<span>·</span>Renacer</div>
+    <div class="login-subtitle">Panel de contenido</div>
+    <label class="login-label" for="pin-input">Contraseña</label>
+    <input id="pin-input" type="password" class="login-input" placeholder="••••••••" autocomplete="current-password" />
+    <button class="login-btn" onclick="intentarLogin()">Entrar al panel</button>
+    <div id="login-error" class="login-error">Contraseña incorrecta. Intenta de nuevo.</div>
+  </div>
+</div>
+
+<!-- ═══ PANEL PRINCIPAL ══════════════════════════════════════ -->
+<div id="admin-panel">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <div style="display:flex;align-items:center;">
+      <span class="topbar-logo">Emprende<span>·</span>Renacer</span>
+      <span class="topbar-badge">Admin</span>
+    </div>
+    <div class="topbar-actions">
+      <a href="/" target="_blank" class="btn-link">Ver sitio ↗</a>
+      <button class="btn-salir" onclick="cerrarSesion()">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <!-- Tabs nav -->
+  <div class="tabs-bar">
+    <button class="tab-btn active" onclick="cambiarTab('config', this)">⚙️ Configuración</button>
+    <button class="tab-btn" onclick="cambiarTab('cronograma', this)">🕐 Cronograma</button>
+    <button class="tab-btn" onclick="cambiarTab('carrusel', this)">🖼️ Fotos del hero</button>
+    <button class="tab-btn" onclick="cambiarTab('formularios', this)">📋 Formularios</button>
+    <button class="tab-btn" onclick="cambiarTab('directorio', this)">🏪 Directorio</button>
+  </div>
+
+  <!-- Contenido -->
+  <div class="content">
+
+    <!-- ── TAB: CONFIGURACIÓN ──────────────────────── -->
+    <div id="tab-config" class="tab-panel active">
+      <div class="section-title">Configuración general</div>
+      <div class="section-desc">Fecha del evento, textos y links de los botones principales.</div>
+
+      <div id="config-loading" class="loading-msg">Cargando…</div>
+      <div id="config-form" style="display:none;">
+        <div class="card">
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="cfg-fecha">Fecha del evento</label>
+              <input type="date" id="cfg-fecha" />
+              <p class="field-hint">Se muestra en el hero y en el footer.</p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="cfg-edicion">Edición</label>
+              <input type="text" id="cfg-edicion" placeholder="Tercera Edición" />
+              <p class="field-hint">Ej: "Tercera Edición"</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="field">
+            <label class="field-label" for="cfg-cta-link">Link del botón "Quiero asistir"</label>
+            <input type="url" id="cfg-cta-link" placeholder="https://lu.ma/..." />
+            <p class="field-hint">URL completa a donde lleva el botón principal.</p>
+          </div>
+          <div class="field">
+            <label class="field-label" for="cfg-cta-texto">Texto del botón</label>
+            <input type="text" id="cfg-cta-texto" placeholder="Quiero asistir" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: CRONOGRAMA ─────────────────────────── -->
+    <div id="tab-cronograma" class="tab-panel">
+      <div class="section-title">Cronograma del evento</div>
+      <div class="section-desc">Agrega, edita o elimina actividades del programa del 1 de mayo.</div>
+
+      <div id="crono-loading" class="loading-msg">Cargando…</div>
+      <div id="crono-form" style="display:none;">
+        <div class="card">
+          <table class="crono-tabla">
+            <thead>
+              <tr>
+                <th style="width:130px;">Hora</th>
+                <th>Actividad</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="crono-tbody"></tbody>
+          </table>
+          <button class="btn-add" onclick="agregarFilaCrono()">+ Agregar actividad</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: CARRUSEL ───────────────────────────── -->
+    <div id="tab-carrusel" class="tab-panel">
+      <div class="section-title">Fotos del hero (carrusel)</div>
+      <div class="section-desc">Gestiona las fotos que rotan de fondo en la sección principal.</div>
+
+      <div class="info-box">
+        <strong>¿Cómo agregar una foto nueva?</strong>
+        <ol>
+          <li>Ir a <a href="https://dash.cloudflare.com" target="_blank" style="color:var(--azul-dark);">dash.cloudflare.com</a> → R2 → bucket <strong>emprende-renacer</strong></li>
+          <li>Abrir la carpeta <strong>fotos-2025</strong> y subir la foto</li>
+          <li>Copiar la URL pública que aparece (empieza con <code>https://pub-d85...</code>)</li>
+          <li>Pegar esa URL en el campo de abajo y clic en <strong>Agregar</strong></li>
+        </ol>
+      </div>
+
+      <div id="carrusel-loading" class="loading-msg">Cargando…</div>
+      <div id="carrusel-form" style="display:none;">
+        <div class="card">
+          <div class="foto-counter" id="foto-counter"></div>
+          <div class="foto-lista" id="foto-lista"></div>
+          <div class="add-url-row">
+            <input type="url" id="nueva-foto-url" placeholder="https://pub-d85456d79cef4d6d8a796e31c6360dac.r2.dev/fotos-2025/foto.jpg" />
+            <button class="btn-add-url" onclick="agregarFoto()">Agregar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: FORMULARIOS ────────────────────────── -->
+    <div id="tab-formularios" class="tab-panel">
+      <div class="section-title">Formularios Typeform</div>
+      <div class="section-desc">Activa o desactiva los formularios de inscripción en el sitio.</div>
+
+      <div id="form-loading" class="loading-msg">Cargando…</div>
+      <div id="form-panel" style="display:none;">
+        <div class="card">
+          <!-- Aplicación -->
+          <div class="toggle-row">
+            <div class="toggle-info">
+              <strong>Formulario de aplicación</strong>
+              <span>Para emprendedores que quieren participar en la feria</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="tf-apl-toggle" onchange="toggleTypeform('apl')" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div id="tf-apl-config" style="display:none;">
+            <div class="typeform-id-row">
+              <label for="tf-apl-id">ID Typeform:</label>
+              <input type="text" id="tf-apl-id" placeholder="ej: AbCdEf12" oninput="actualizarPreviewTF('apl')" />
+            </div>
+            <div class="typeform-preview" id="tf-apl-preview"></div>
+          </div>
+
+          <!-- Talleres -->
+          <div class="toggle-row" style="margin-top:4px;">
+            <div class="toggle-info">
+              <strong>Formulario de talleres</strong>
+              <span>Para personas que quieren dictar un taller el día del evento</span>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="tf-tal-toggle" onchange="toggleTypeform('tal')" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div id="tf-tal-config" style="display:none;">
+            <div class="typeform-id-row">
+              <label for="tf-tal-id">ID Typeform:</label>
+              <input type="text" id="tf-tal-id" placeholder="ej: XyZaBc34" oninput="actualizarPreviewTF('tal')" />
+            </div>
+            <div class="typeform-preview" id="tf-tal-preview"></div>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:16px;">
+          <strong>¿Cómo consigo el ID de Typeform?</strong><br/>
+          En typeform.com → tu formulario → Share → copia el link. El ID es la parte final: <code>typeform.com/to/<strong>AbCdEf12</strong></code>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB: DIRECTORIO ─────────────────────────── -->
+    <div id="tab-directorio" class="tab-panel">
+      <div class="section-title">Directorio de emprendimientos</div>
+      <div class="section-desc">Completa la descripción y datos de contacto de cada emprendimiento.</div>
+
+      <div id="dir-loading" class="loading-msg">Cargando…</div>
+      <div id="dir-form" style="display:none;">
+        <div class="emp-list" id="emp-list"></div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+
+  <!-- Save bar -->
+  <div class="save-bar">
+    <span class="save-status" id="save-status"></span>
+    <button class="btn-guardar" id="btn-guardar" onclick="guardarTab()">
+      Guardar cambios
+    </button>
+  </div>
+
+</div><!-- /admin-panel -->
+
+<script>
+// ════════════════════════════════════════════════
+//  ESTADO
+// ════════════════════════════════════════════════
+let tabActual = 'config';
+let shaCache  = {};  // sha por archivo
+let datosCache = {}; // contenido original por archivo
+
+// ════════════════════════════════════════════════
+//  LOGIN
+// ════════════════════════════════════════════════
+function intentarLogin() {
+  const pin = document.getElementById('pin-input').value.trim();
+  if (!pin) return;
+  // Guardamos el PIN y lo verificamos al primer request real
+  sessionStorage.setItem('admin_pin', pin);
+  mostrarPanel();
+}
+
+document.getElementById('pin-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') intentarLogin();
+});
+
+function mostrarPanel() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('admin-panel').style.display = 'block';
+  cargarTab('config');
+}
+
+function cerrarSesion() {
+  sessionStorage.removeItem('admin_pin');
+  location.reload();
+}
+
+// Al cargar: si ya hay sesión activa, ir directo al panel
+if (sessionStorage.getItem('admin_pin')) {
+  mostrarPanel();
+}
+
+// ════════════════════════════════════════════════
+//  TABS
+// ════════════════════════════════════════════════
+function cambiarTab(tab, btn) {
+  tabActual = tab;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + tab).classList.add('active');
+  setStatus('');
+  cargarTab(tab);
+}
+
+// ════════════════════════════════════════════════
+//  API HELPERS
+// ════════════════════════════════════════════════
+async function apiLoad(file) {
+  const r = await fetch('/api/load?file=' + file);
+  if (!r.ok) {
+    const err = await r.json().catch(() => ({}));
+    throw new Error(err.error || 'Error cargando datos');
+  }
+  return r.json();
+}
+
+async function apiSave(file, content) {
+  const pin = sessionStorage.getItem('admin_pin');
+  const sha = shaCache[file];
+  const r = await fetch('/api/save', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ file, sha, content, pin })
+  });
+  const result = await r.json();
+  if (!r.ok) throw new Error(result.error || 'Error al guardar');
+  if (result.sha) shaCache[file] = result.sha;
+  return result;
+}
+
+// ════════════════════════════════════════════════
+//  CARGAR TABS
+// ════════════════════════════════════════════════
+const tabCargada = {};
+
+async function cargarTab(tab) {
+  if (tabCargada[tab]) return; // ya está cargada
+
+  const fileMap = {
+    config:      'config',
+    cronograma:  'cronograma',
+    carrusel:    'carrusel',
+    formularios: 'config',   // usa el mismo config.json
+    directorio:  'ediciones'
+  };
+
+  const file = fileMap[tab];
+  try {
+    // Si el archivo ya está en cache (config + formularios lo comparten)
+    if (!datosCache[file]) {
+      const res = await apiLoad(file);
+      shaCache[file]  = res.sha;
+      datosCache[file] = res.content;
+    }
+    renderTab(tab, datosCache[file]);
+    tabCargada[tab] = true;
+  } catch (e) {
+    mostrarLoadingError(tab, e.message);
+  }
+}
+
+function renderTab(tab, data) {
+  switch (tab) {
+    case 'config':      renderConfig(data); break;
+    case 'cronograma':  renderCronograma(data); break;
+    case 'carrusel':    renderCarrusel(data); break;
+    case 'formularios': renderFormularios(data); break;
+    case 'directorio':  renderDirectorio(data); break;
+  }
+}
+
+function mostrarLoadingError(tab, msg) {
+  const loadingId = { config:'config-loading', cronograma:'crono-loading',
+                      carrusel:'carrusel-loading', formularios:'form-loading', directorio:'dir-loading' };
+  const el = document.getElementById(loadingId[tab]);
+  if (el) el.textContent = 'Error: ' + msg;
+}
+
+// ════════════════════════════════════════════════
+//  RENDER CONFIG
+// ════════════════════════════════════════════════
+function renderConfig(data) {
+  document.getElementById('config-loading').style.display = 'none';
+  document.getElementById('config-form').style.display = 'block';
+  document.getElementById('cfg-fecha').value    = data.fecha || '';
+  document.getElementById('cfg-edicion').value  = data.edicion || '';
+  document.getElementById('cfg-cta-link').value = data.cta_link || '';
+  document.getElementById('cfg-cta-texto').value= data.cta_texto || '';
+}
+
+function leerConfig() {
+  const base = datosCache['config'] || {};
+  return {
+    ...base,
+    fecha:    document.getElementById('cfg-fecha').value,
+    edicion:  document.getElementById('cfg-edicion').value.trim(),
+    cta_link: document.getElementById('cfg-cta-link').value.trim(),
+    cta_texto:document.getElementById('cfg-cta-texto').value.trim()
+  };
+}
+
+// ════════════════════════════════════════════════
+//  RENDER CRONOGRAMA
+// ════════════════════════════════════════════════
+function renderCronograma(items) {
+  document.getElementById('crono-loading').style.display = 'none';
+  document.getElementById('crono-form').style.display = 'block';
+  const tbody = document.getElementById('crono-tbody');
+  tbody.innerHTML = '';
+  items.forEach(item => agregarFilaCronoConDatos(item.hora, item.actividad));
+}
+
+function agregarFilaCrono() {
+  agregarFilaCronoConDatos('', '');
+}
+
+function agregarFilaCronoConDatos(hora, actividad) {
+  const tbody = document.getElementById('crono-tbody');
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td><input type="text" class="crono-hora" value="' + esc(hora) + '" placeholder="10:00 AM" /></td>' +
+    '<td><input type="text" class="crono-act"  value="' + esc(actividad) + '" placeholder="Describe la actividad…" /></td>' +
+    '<td><button class="btn-del" onclick="this.closest(\'tr\').remove()" title="Eliminar">✕</button></td>';
+  tbody.appendChild(tr);
+}
+
+function leerCronograma() {
+  const rows = document.querySelectorAll('#crono-tbody tr');
+  const items = [];
+  rows.forEach(tr => {
+    const hora = tr.querySelector('.crono-hora').value.trim();
+    const act  = tr.querySelector('.crono-act').value.trim();
+    if (hora || act) items.push({ hora, actividad: act });
+  });
+  return items;
+}
+
+// ════════════════════════════════════════════════
+//  RENDER CARRUSEL
+// ════════════════════════════════════════════════
+function renderCarrusel(urls) {
+  document.getElementById('carrusel-loading').style.display = 'none';
+  document.getElementById('carrusel-form').style.display = 'block';
+  renderFotoLista(urls);
+}
+
+function renderFotoLista(urls) {
+  const lista = document.getElementById('foto-lista');
+  const counter = document.getElementById('foto-counter');
+  counter.textContent = urls.length + ' foto' + (urls.length !== 1 ? 's' : '') + ' en el carrusel';
+  lista.innerHTML = '';
+  urls.forEach((url, i) => {
+    const div = document.createElement('div');
+    div.className = 'foto-item';
+    div.dataset.url = url;
+    div.innerHTML =
+      '<img class="foto-thumb" src="' + esc(url) + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" />' +
+      '<div class="foto-thumb-placeholder" style="display:none">🖼️</div>' +
+      '<span class="foto-url">' + esc(url) + '</span>' +
+      '<button class="btn-del" onclick="eliminarFoto(this)" title="Eliminar foto">✕</button>';
+    lista.appendChild(div);
+  });
+}
+
+function eliminarFoto(btn) {
+  btn.closest('.foto-item').remove();
+  actualizarContadorFotos();
+}
+
+function actualizarContadorFotos() {
+  const n = document.querySelectorAll('.foto-item').length;
+  document.getElementById('foto-counter').textContent = n + ' foto' + (n !== 1 ? 's' : '') + ' en el carrusel';
+}
+
+function agregarFoto() {
+  const input = document.getElementById('nueva-foto-url');
+  const url = input.value.trim();
+  if (!url) return;
+  if (!url.startsWith('http')) {
+    alert('Pega una URL completa que empiece con https://');
+    return;
+  }
+  // Verificar duplicado
+  const existentes = Array.from(document.querySelectorAll('.foto-item')).map(d => d.dataset.url);
+  if (existentes.includes(url)) {
+    alert('Esa URL ya está en el carrusel.');
+    return;
+  }
+  const lista = document.getElementById('foto-lista');
+  const div = document.createElement('div');
+  div.className = 'foto-item';
+  div.dataset.url = url;
+  div.innerHTML =
+    '<img class="foto-thumb" src="' + esc(url) + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'" />' +
+    '<div class="foto-thumb-placeholder" style="display:none">🖼️</div>' +
+    '<span class="foto-url">' + esc(url) + '</span>' +
+    '<button class="btn-del" onclick="eliminarFoto(this)" title="Eliminar foto">✕</button>';
+  lista.appendChild(div);
+  input.value = '';
+  actualizarContadorFotos();
+}
+
+function leerCarrusel() {
+  return Array.from(document.querySelectorAll('.foto-item')).map(d => d.dataset.url);
+}
+
+// ════════════════════════════════════════════════
+//  RENDER FORMULARIOS
+// ════════════════════════════════════════════════
+function renderFormularios(data) {
+  document.getElementById('form-loading').style.display = 'none';
+  document.getElementById('form-panel').style.display = 'block';
+
+  const aplId = data.typeform_aplicacion || '';
+  const talId = data.typeform_talleres   || '';
+
+  document.getElementById('tf-apl-toggle').checked = !!aplId;
+  document.getElementById('tf-apl-id').value = aplId;
+  document.getElementById('tf-apl-config').style.display = aplId ? 'block' : 'none';
+  actualizarPreviewTF('apl');
+
+  document.getElementById('tf-tal-toggle').checked = !!talId;
+  document.getElementById('tf-tal-id').value = talId;
+  document.getElementById('tf-tal-config').style.display = talId ? 'block' : 'none';
+  actualizarPreviewTF('tal');
+}
+
+function toggleTypeform(tipo) {
+  const activo = document.getElementById('tf-' + tipo + '-toggle').checked;
+  document.getElementById('tf-' + tipo + '-config').style.display = activo ? 'block' : 'none';
+}
+
+function actualizarPreviewTF(tipo) {
+  const id = document.getElementById('tf-' + tipo + '-id').value.trim();
+  const preview = document.getElementById('tf-' + tipo + '-preview');
+  preview.textContent = id ? 'URL: https://form.typeform.com/to/' + id : '';
+}
+
+function leerFormularios() {
+  const base = datosCache['config'] || {};
+  const aplActivo = document.getElementById('tf-apl-toggle').checked;
+  const talActivo = document.getElementById('tf-tal-toggle').checked;
+  return {
+    ...base,
+    typeform_aplicacion: aplActivo ? document.getElementById('tf-apl-id').value.trim() : '',
+    typeform_talleres:   talActivo ? document.getElementById('tf-tal-id').value.trim() : ''
+  };
+}
+
+// ════════════════════════════════════════════════
+//  RENDER DIRECTORIO
+// ════════════════════════════════════════════════
+function renderDirectorio(ediciones) {
+  document.getElementById('dir-loading').style.display = 'none';
+  document.getElementById('dir-form').style.display = 'block';
+  const lista = document.getElementById('emp-list');
+  lista.innerHTML = '';
+
+  ediciones.forEach((ed, ei) => {
+    ed.emprendimientos.forEach((emp, i) => {
+      const nombre = emp.nombre || emp.archivo.replace(/\.[^.]+$/, '');
+      const logoUrl = ed.carpeta + '/' + emp.archivo;
+      const div = document.createElement('div');
+      div.className = 'emp-item';
+      div.dataset.edIndex = ei;
+      div.dataset.empIndex = i;
+
+      div.innerHTML =
+        '<div class="emp-header" onclick="toggleEmp(this.parentElement)">' +
+          '<img class="emp-logo" src="' + esc(logoUrl) + '" alt="" onerror="this.style.opacity=\'0\'" />' +
+          '<span class="emp-name">' + esc(nombre) + '</span>' +
+          (emp.categoria ? '<span class="emp-cat-badge">' + esc(emp.categoria) + '</span>' : '') +
+          '<span class="emp-arrow">▼</span>' +
+        '</div>' +
+        '<div class="emp-body">' +
+          '<div class="emp-fields">' +
+            '<div class="emp-field">' +
+              '<label>Categoría</label>' +
+              '<input type="text" class="emp-categoria" value="' + esc(emp.categoria) + '" placeholder="Ej: Gastronomía, Moda, Arte…" />' +
+            '</div>' +
+            '<div class="emp-field">' +
+              '<label>Descripción</label>' +
+              '<textarea class="emp-descripcion" placeholder="Cuéntanos qué ofrece este emprendimiento…">' + esc(emp.descripcion) + '</textarea>' +
+            '</div>' +
+            '<div class="field-row">' +
+              '<div class="emp-field">' +
+                '<label>WhatsApp</label>' +
+                '<input type="text" class="emp-whatsapp" value="' + esc(emp.contacto_whatsapp) + '" placeholder="573001234567" />' +
+              '</div>' +
+              '<div class="emp-field">' +
+                '<label>Instagram</label>' +
+                '<input type="text" class="emp-instagram" value="' + esc(emp.contacto_instagram) + '" placeholder="@mi_emprendimiento" />' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      lista.appendChild(div);
+    });
+  });
+}
+
+function toggleEmp(el) {
+  el.classList.toggle('open');
+}
+
+function leerDirectorio() {
+  const ediciones = JSON.parse(JSON.stringify(datosCache['ediciones'])); // deep copy
+  document.querySelectorAll('.emp-item').forEach(item => {
+    const ei = parseInt(item.dataset.edIndex);
+    const i  = parseInt(item.dataset.empIndex);
+    ediciones[ei].emprendimientos[i].categoria          = item.querySelector('.emp-categoria').value.trim();
+    ediciones[ei].emprendimientos[i].descripcion        = item.querySelector('.emp-descripcion').value.trim();
+    ediciones[ei].emprendimientos[i].contacto_whatsapp  = item.querySelector('.emp-whatsapp').value.trim();
+    ediciones[ei].emprendimientos[i].contacto_instagram = item.querySelector('.emp-instagram').value.trim();
+  });
+  return ediciones;
+}
+
+// ════════════════════════════════════════════════
+//  GUARDAR
+// ════════════════════════════════════════════════
+async function guardarTab() {
+  const btn = document.getElementById('btn-guardar');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Guardando…';
+  setStatus('');
+
+  try {
+    let file, content;
+
+    switch (tabActual) {
+      case 'config':
+        file    = 'config';
+        content = leerConfig();
+        // Sincronizar también en cache para que formularios lo use
+        datosCache['config'] = content;
+        break;
+      case 'cronograma':
+        file    = 'cronograma';
+        content = leerCronograma();
+        break;
+      case 'carrusel':
+        file    = 'carrusel';
+        content = leerCarrusel();
+        break;
+      case 'formularios':
+        file    = 'config';
+        content = leerFormularios();
+        datosCache['config'] = content;
+        break;
+      case 'directorio':
+        file    = 'ediciones';
+        content = leerDirectorio();
+        datosCache['ediciones'] = content;
+        break;
+    }
+
+    await apiSave(file, content);
+    setStatus('✓ Guardado. El sitio se actualiza en ~30 segundos.', 'ok');
+
+  } catch (e) {
+    if (e.message.includes('incorrecta') || e.message.includes('401')) {
+      setStatus('❌ Contraseña incorrecta. Cierra sesión e intenta de nuevo.', 'err');
+    } else if (e.message.includes('409') || e.message.includes('sha')) {
+      setStatus('⚠️ Conflicto: otra persona guardó al mismo tiempo. Recarga la página.', 'err');
+    } else {
+      setStatus('❌ Error: ' + e.message, 'err');
+    }
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = 'Guardar cambios';
+  }
+}
+
+function setStatus(msg, tipo) {
+  const el = document.getElementById('save-status');
+  el.textContent = msg;
+  el.className = 'save-status' + (tipo ? ' ' + tipo : '');
+}
+
+// ════════════════════════════════════════════════
+//  UTILS
+// ════════════════════════════════════════════════
+function esc(str) {
+  return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+
+</body>
+</html>
