@@ -1226,7 +1226,8 @@ ul { list-style: none; }
 }
 .btn-contacto:hover { opacity: 0.85; transform: translateX(3px); }
 .btn-whatsapp  { background: #25D366; color: #fff; }
-.btn-instagram { background: #E1306C; color: #fff; }
+.btn-instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+.btn-web       { background: var(--terracota-bg); color: var(--terracota-dark); border: 1px solid #C3D9EC; }
 
 /* ══════════════════════════════════════════════════════════
    FORMULARIOS

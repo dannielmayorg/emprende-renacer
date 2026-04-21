@@ -1308,6 +1308,16 @@ function renderEdicionesAdmin(ediciones) {
               '<input type="text" id="nuevo-emp-wa-' + ei + '" placeholder="573001234567" />' +
             '</div>' +
           '</div>' +
+          '<div class="field-row">' +
+            '<div class="field">' +
+              '<label class="field-label">Instagram</label>' +
+              '<input type="text" id="nuevo-emp-ig-' + ei + '" placeholder="@mi_emprendimiento" />' +
+            '</div>' +
+            '<div class="field">' +
+              '<label class="field-label">Página web</label>' +
+              '<input type="url" id="nuevo-emp-web-' + ei + '" placeholder="https://miweb.com" />' +
+            '</div>' +
+          '</div>' +
           '<div class="field">' +
             '<label class="field-label">Descripción</label>' +
             '<textarea id="nuevo-emp-desc-' + ei + '" placeholder="¿Qué ofrece este emprendimiento?"></textarea>' +
@@ -1353,6 +1363,10 @@ function crearEmpItemHtml(ed, emp, ei, i) {
             '<label>Instagram</label>' +
             '<input type="text" class="emp-instagram" value="' + esc(emp.contacto_instagram) + '" placeholder="@mi_emprendimiento" />' +
           '</div>' +
+        '</div>' +
+        '<div class="emp-field">' +
+          '<label>Página web</label>' +
+          '<input type="url" class="emp-web" value="' + esc(emp.pagina_web || '') + '" placeholder="https://miweb.com" />' +
         '</div>' +
       '</div>' +
     '</div>' +
@@ -1447,7 +1461,10 @@ function confirmarNuevoEmp(ei) {
   const edIndex = parseInt(bloque.dataset.edIndex);
   const ed = datosCache['ediciones'][edIndex];
 
-  const nuevoEmp = { archivo, categoria: cat, descripcion: desc, contacto_whatsapp: wa, contacto_instagram: '' };
+  const ig  = document.getElementById('nuevo-emp-ig-'  + ei)?.value.trim() || '';
+  const web = document.getElementById('nuevo-emp-web-' + ei)?.value.trim() || '';
+
+  const nuevoEmp = { archivo, categoria: cat, descripcion: desc, contacto_whatsapp: wa, contacto_instagram: ig, pagina_web: web };
   const lista = document.getElementById('emp-list-' + ei);
   const i = lista.querySelectorAll('.emp-item').length;
   lista.insertAdjacentHTML('beforeend', crearEmpItemHtml(ed, nuevoEmp, edIndex, i));
@@ -1457,6 +1474,8 @@ function confirmarNuevoEmp(ei) {
   document.getElementById('nuevo-emp-cat-'     + ei).value = '';
   document.getElementById('nuevo-emp-desc-'    + ei).value = '';
   document.getElementById('nuevo-emp-wa-'      + ei).value = '';
+  if (document.getElementById('nuevo-emp-ig-'  + ei)) document.getElementById('nuevo-emp-ig-'  + ei).value = '';
+  if (document.getElementById('nuevo-emp-web-' + ei)) document.getElementById('nuevo-emp-web-' + ei).value = '';
   document.getElementById('nuevo-emp-form-'    + ei).style.display = 'none';
 }
 
@@ -1486,10 +1505,11 @@ function leerDirectorio() {
       const orig = (datosCache['ediciones'][eei] || {}).emprendimientos?.[i] || {};
       emprendimientos.push({
         archivo:             orig.archivo || '',
-        categoria:           item.querySelector('.emp-categoria')?.value.trim() || '',
-        descripcion:         item.querySelector('.emp-descripcion')?.value.trim() || '',
+        categoria:           item.querySelector('.emp-categoria')?.value.trim()  || '',
+        descripcion:         item.querySelector('.emp-descripcion')?.value.trim()|| '',
         contacto_whatsapp:   item.querySelector('.emp-whatsapp')?.value.trim()   || '',
-        contacto_instagram:  item.querySelector('.emp-instagram')?.value.trim()  || ''
+        contacto_instagram:  item.querySelector('.emp-instagram')?.value.trim()  || '',
+        pagina_web:          item.querySelector('.emp-web')?.value.trim()        || ''
       });
     });
     ediciones.push({ año: edOrig.año, carpeta: edOrig.carpeta, emprendimientos });
