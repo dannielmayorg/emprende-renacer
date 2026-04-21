@@ -79,55 +79,61 @@
   </div>
 
   <!-- ══════════════════════════════════════════
-       RIFA — cards strip
+       RIFA — carrusel de slides
   ══════════════════════════════════════════ -->
   <section id="rifa-strip">
     <span class="rifa-strip-label">Actividades del día</span>
-    <div class="rifa-track-wrap">
-      <div class="rifa-track">
 
-        <!-- Card 1: Rifa -->
-        <div class="rifa-card">
-          <span class="rifa-card-icon">🎟️</span>
-          <div class="rifa-card-title">Participa por una rifa</div>
-          <p class="rifa-card-sub">¡Queremos premiarte por tus compras!</p>
-          <div class="rifa-pasos">
-            <div class="rifa-paso">
-              <span class="rifa-paso-num">1</span>
-              <span>Reclama tu cartón al entrar a la feria</span>
-            </div>
-            <div class="rifa-paso">
-              <span class="rifa-paso-num">2</span>
-              <span>Completa 5 sellos o firmas de los emprendedores</span>
-            </div>
-            <div class="rifa-paso">
-              <span class="rifa-paso-num">3</span>
-              <span>Regístrate en el link del evento en Lu.ma</span>
-            </div>
-            <div class="rifa-paso">
-              <span class="rifa-paso-num">4</span>
-              <span>Únete al canal de WhatsApp de la feria</span>
+    <div class="rifa-carousel" id="rifa-carousel">
+      <div class="rifa-slides" id="rifa-slides">
+
+        <!-- Slide 1: Rifa -->
+        <div class="rifa-slide rifa-slide-rifa">
+          <div class="rifa-slide-top">
+            <span class="rifa-slide-icon">🎟️</span>
+            <div class="rifa-slide-title">Participa por una rifa</div>
+            <p class="rifa-slide-sub">¡Queremos premiarte por tus compras!</p>
+            <div class="rifa-pasos">
+              <div class="rifa-paso"><span class="rifa-paso-num">1</span><span>Reclama tu cartón al entrar a la feria</span></div>
+              <div class="rifa-paso"><span class="rifa-paso-num">2</span><span>Completa 5 sellos o firmas de los emprendedores</span></div>
+              <div class="rifa-paso"><span class="rifa-paso-num">3</span><span>Regístrate en el link del evento en Lu.ma</span></div>
+              <div class="rifa-paso"><span class="rifa-paso-num">4</span><span>Únete al canal de WhatsApp de la feria</span></div>
             </div>
           </div>
-          <p class="rifa-cta-text">¡Reclama tu ticket y participa en la rifa de premios por tus compras! 🛒</p>
+          <div class="rifa-slide-footer">¡Reclama tu ticket y participa en la rifa de premios por tus compras! 🛒</div>
         </div>
 
-        <!-- Card 2: Talleres -->
-        <div class="rifa-card-plain">
-          <span class="rifa-card-plain-icon">🎨</span>
-          <div class="rifa-card-plain-title">Mini-talleres en vivo</div>
-          <p class="rifa-card-plain-text">Lettering, Maquillaje Express, Mini-cata de Café y más. ¡Sin costo adicional!</p>
-          <a href="#cronograma" class="btn-cta">Ver cronograma <span class="btn-arrow">→</span></a>
-        </div>
-
-        <!-- Card 3: Stand solidario -->
-        <div class="rifa-card-plain">
-          <span class="rifa-card-plain-icon">🤝</span>
-          <div class="rifa-card-plain-title">Stand solidario</div>
-          <p class="rifa-card-plain-text">Gran venta de garaje. Todo lo recaudado va a apoyar a una familia de nuestra congregación.</p>
+        <!-- Slide 2: Stand solidario -->
+        <div class="rifa-slide rifa-slide-stand">
+          <div class="rifa-slide-top">
+            <span class="rifa-slide-icon">🤝</span>
+            <div class="rifa-slide-title">Stand solidario</div>
+            <p class="rifa-slide-sub">Gran venta de garaje con corazón</p>
+            <div class="stand-info">
+              <p>Todo lo recaudado será para apoyar a una familia de nuestra congregación.</p>
+              <div class="stand-dona">
+                <strong>¡Dona hoy!</strong> Trae artículos en excelente estado. Recibimos donaciones hasta el 20 de abril en la iglesia. Ven el 01 de mayo, encuentra un tesoro y apoya esta causa.
+              </div>
+              <div class="stand-wa-row">
+                <a href="https://wa.me/573138913217" target="_blank" class="stand-wa-btn">📱 Mercedes Cuellar</a>
+                <a href="https://wa.me/573107863801" target="_blank" class="stand-wa-btn">📱 Martha Gil</a>
+              </div>
+            </div>
+          </div>
+          <div class="rifa-slide-footer">Nuestra feria tiene corazón 🧡</div>
         </div>
 
       </div>
+    </div>
+
+    <!-- Controles -->
+    <div class="rifa-controls">
+      <button class="rifa-arrow-btn" id="rifa-prev" aria-label="Anterior">‹</button>
+      <div class="rifa-dots" id="rifa-dots">
+        <button class="rifa-dot active" onclick="irRifaSlide(0)"></button>
+        <button class="rifa-dot" onclick="irRifaSlide(1)"></button>
+      </div>
+      <button class="rifa-arrow-btn" id="rifa-next" aria-label="Siguiente">›</button>
     </div>
   </section>
 
@@ -690,6 +696,42 @@
         }).join('');
       } catch(e) {}
     }
+
+    // ── Carrusel rifa ─────────────────────────────────────
+    (function() {
+      const slides  = document.getElementById('rifa-slides');
+      const dots    = document.querySelectorAll('.rifa-dot');
+      const total   = 2;
+      let actual    = 0;
+      let timer;
+
+      function irRifaSlide(idx) {
+        actual = (idx + total) % total;
+        slides.style.transform = 'translateX(-' + (actual * 100) + '%)';
+        dots.forEach((d, i) => d.classList.toggle('active', i === actual));
+        reiniciarRifaTimer();
+      }
+
+      window.irRifaSlide = irRifaSlide;
+
+      function reiniciarRifaTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => irRifaSlide(actual + 1), 6000);
+      }
+
+      document.getElementById('rifa-prev').addEventListener('click', () => irRifaSlide(actual - 1));
+      document.getElementById('rifa-next').addEventListener('click', () => irRifaSlide(actual + 1));
+
+      // Swipe táctil
+      let tx = 0;
+      slides.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+      slides.addEventListener('touchend',   e => {
+        const d = tx - e.changedTouches[0].clientX;
+        if (Math.abs(d) > 40) irRifaSlide(actual + (d > 0 ? 1 : -1));
+      }, { passive: true });
+
+      reiniciarRifaTimer();
+    })();
 
     cargarConfig();
     cargarCronograma();

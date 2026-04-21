@@ -455,13 +455,12 @@ ul { list-style: none; }
 }
 
 /* ══════════════════════════════════════════════════════════
-   RIFA — cards strip debajo del logo strip
+   RIFA — carrusel de slides (reemplaza cards strip)
 ══════════════════════════════════════════════════════════ */
 #rifa-strip {
   background: var(--bg-base);
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 2rem 2rem;
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
 }
 .rifa-strip-label {
   font-family: var(--font-ui);
@@ -473,71 +472,100 @@ ul { list-style: none; }
   display: block;
   margin-bottom: 1.2rem;
 }
-.rifa-track-wrap {
-  position: relative;
-}
-.rifa-track {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  padding-bottom: 4px;
-}
-.rifa-track::-webkit-scrollbar { display: none; }
 
-.rifa-card {
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  width: min(460px, 85vw);
-  background: linear-gradient(135deg, var(--terracota) 0%, var(--terracota-dark) 100%);
-  border-radius: 16px;
-  padding: 2rem 2rem 1.8rem;
-  color: #fff;
+/* Carrusel wrapper */
+.rifa-carousel {
   position: relative;
   overflow: hidden;
+  border-radius: 20px;
+  max-width: 680px;
+  margin: 0 auto;
 }
-.rifa-card::before {
+.rifa-slides {
+  display: flex;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+/* Slide base */
+.rifa-slide {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 2.4rem 2.2rem 2rem;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Slide 1 — Rifa (azul) */
+.rifa-slide-rifa {
+  background: linear-gradient(135deg, var(--terracota) 0%, var(--terracota-dark) 100%);
+  color: #fff;
+}
+.rifa-slide-rifa::before {
   content: '';
   position: absolute;
-  top: -40px; right: -40px;
-  width: 180px; height: 180px;
+  top: -50px; right: -50px;
+  width: 200px; height: 200px;
   border-radius: 50%;
   background: rgba(255,255,255,0.06);
+  pointer-events: none;
 }
-.rifa-card::after {
+.rifa-slide-rifa::after {
   content: '';
   position: absolute;
-  bottom: -50px; left: -20px;
-  width: 140px; height: 140px;
+  bottom: -60px; left: -30px;
+  width: 160px; height: 160px;
   border-radius: 50%;
   background: rgba(255,255,255,0.04);
+  pointer-events: none;
 }
-.rifa-card-icon {
-  font-size: 2rem;
-  margin-bottom: 0.8rem;
+
+/* Slide 2 — Stand solidario (naranja cálido) */
+.rifa-slide-stand {
+  background: linear-gradient(135deg, var(--naranja) 0%, #b54b1a 100%);
+  color: #fff;
+}
+.rifa-slide-stand::before {
+  content: '';
+  position: absolute;
+  top: -50px; right: -50px;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  pointer-events: none;
+}
+
+/* Contenido de slides */
+.rifa-slide-top { position: relative; z-index: 1; }
+.rifa-slide-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.9rem;
   display: block;
 }
-.rifa-card-title {
+.rifa-slide-title {
   font-family: var(--font-body);
-  font-size: 1.5rem;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  line-height: 1.15;
-  margin-bottom: 0.4rem;
+  line-height: 1.1;
+  margin-bottom: 0.35rem;
 }
-.rifa-card-sub {
+.rifa-slide-sub {
   font-size: 0.88rem;
   color: rgba(255,255,255,0.75);
-  margin-bottom: 1.4rem;
   line-height: 1.5;
 }
+
 .rifa-pasos {
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
-  margin-bottom: 1.4rem;
+  gap: 0.65rem;
+  margin-top: 1.2rem;
   position: relative;
   z-index: 1;
 }
@@ -552,56 +580,108 @@ ul { list-style: none; }
 .rifa-paso-num {
   width: 22px; height: 22px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.22);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 0.7rem;
   font-weight: 700;
   flex-shrink: 0;
-  margin-top: 1px;
+  margin-top: 2px;
 }
-.rifa-cta-text {
+
+/* Stand slide content */
+.stand-info {
+  margin-top: 1.2rem;
+  position: relative;
+  z-index: 1;
+}
+.stand-info p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.65;
+  margin-bottom: 0.8rem;
+}
+.stand-dona {
+  background: rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+}
+.stand-wa-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.9rem;
+}
+.stand-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255,255,255,0.18);
+  color: #fff;
   font-size: 0.82rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.65);
+  padding: 0.45rem 0.9rem;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.stand-wa-btn:hover { background: rgba(255,255,255,0.28); }
+
+/* Footer de slide */
+.rifa-slide-footer {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
   border-top: 1px solid rgba(255,255,255,0.15);
-  padding-top: 1rem;
+  padding-top: 0.9rem;
+  margin-top: 1rem;
   position: relative;
   z-index: 1;
 }
 
-/* Card "más info" placeholder */
-.rifa-card-plain {
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  width: min(300px, 70vw);
-  background: var(--bg-section);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 2rem;
+/* Controles del carrusel */
+.rifa-controls {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  gap: 0.5rem;
+  gap: 1rem;
+  margin-top: 1.2rem;
 }
-.rifa-card-plain-icon { font-size: 1.6rem; }
-.rifa-card-plain-title {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
+.rifa-dots {
+  display: flex;
+  gap: 0.4rem;
 }
-.rifa-card-plain-text {
-  font-size: 0.88rem;
+.rifa-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  border: none;
+}
+.rifa-dot.active {
+  background: var(--terracota);
+  transform: scale(1.25);
+}
+.rifa-arrow-btn {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
   color: var(--text-secondary);
-  line-height: 1.5;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
 }
-.rifa-card-plain .btn-cta {
-  margin-top: 0.8rem;
-  font-size: 0.82rem;
-  padding: 0.55rem 1.1rem;
+.rifa-arrow-btn:hover {
+  border-color: var(--terracota);
+  color: var(--terracota);
+  background: var(--terracota-bg);
 }
 
 /* ══════════════════════════════════════════════════════════

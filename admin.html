@@ -650,6 +650,41 @@
       color: var(--azul-dark);
     }
 
+    /* Upload área */
+    .upload-area {
+      border: 2px dashed var(--borde);
+      border-radius: 10px;
+      padding: 20px;
+      cursor: pointer;
+      transition: border-color .15s, background .15s;
+      background: #fff;
+      text-align: center;
+    }
+    .upload-area:hover { border-color: var(--azul); background: var(--azul-light); }
+    .upload-preview {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .upload-preview img {
+      width: 72px; height: 72px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--borde);
+    }
+    .upload-icon { font-size: 2rem; }
+    .upload-text { font-size: 13px; color: var(--gris); line-height: 1.5; }
+    .upload-text small { font-size: 11px; opacity: .7; }
+    .upload-status {
+      font-size: 12px;
+      margin-top: 6px;
+      min-height: 18px;
+    }
+    .upload-status.uploading { color: var(--azul); }
+    .upload-status.ok  { color: var(--verde); font-weight: 600; }
+    .upload-status.err { color: var(--rojo); }
+
     /* ── INFO BOX ──────────────────────────────────── */
     .info-box {
       background: var(--azul-light);
@@ -1246,10 +1281,22 @@ function renderEdicionesAdmin(ediciones) {
         '<button class="btn-add" onclick="mostrarFormNuevoEmp(' + ei + ')">+ Agregar emprendimiento</button>' +
         '<div id="nuevo-emp-form-' + ei + '" style="display:none;" class="nueva-edicion-form">' +
           '<h4>Nuevo emprendimiento</h4>' +
+          // Upload de logo
           '<div class="field">' +
-            '<label class="field-label">Nombre del archivo en R2 <span style="font-weight:400;color:var(--gris);">(ej: Mi Negocio.jpeg)</span></label>' +
+            '<label class="field-label">Logo del emprendimiento</label>' +
+            '<div class="upload-area" id="upload-area-' + ei + '" onclick="document.getElementById(\'logo-file-' + ei + '\').click()">' +
+              '<div class="upload-preview" id="upload-preview-' + ei + '">' +
+                '<span class="upload-icon">📁</span>' +
+                '<span class="upload-text">Clic para seleccionar imagen<br><small>JPG, PNG, WEBP · Máx 4MB</small></span>' +
+              '</div>' +
+            '</div>' +
+            '<input type="file" id="logo-file-' + ei + '" accept="image/*" style="display:none" onchange="previewLogo(' + ei + ', this)" />' +
+            '<div class="upload-status" id="upload-status-' + ei + '"></div>' +
+          '</div>' +
+          '<div class="field">' +
+            '<label class="field-label">Nombre en R2 <span style="font-weight:400;color:var(--gris);">(se llena automático al subir)</span></label>' +
             '<input type="text" id="nuevo-emp-archivo-' + ei + '" placeholder="Nombre del logo.jpeg" />' +
-            '<p class="field-hint">Debe coincidir exactamente con el archivo subido en Cloudflare R2 → logos/</p>' +
+            '<p class="field-hint">Si ya está en R2, escribe el nombre exacto del archivo. Si subes uno nuevo, se llena solo.</p>' +
           '</div>' +
           '<div class="field-row">' +
             '<div class="field">' +
@@ -1266,7 +1313,7 @@ function renderEdicionesAdmin(ediciones) {
             '<textarea id="nuevo-emp-desc-' + ei + '" placeholder="¿Qué ofrece este emprendimiento?"></textarea>' +
           '</div>' +
           '<div style="display:flex;gap:8px;margin-top:4px;">' +
-            '<button class="btn-add" onclick="confirmarNuevoEmp(' + ei + ')">✓ Agregar</button>' +
+            '<button class="btn-add" id="btn-agregar-' + ei + '" onclick="confirmarNuevoEmp(' + ei + ')">✓ Agregar</button>' +
             '<button class="btn-del" onclick="document.getElementById(\'nuevo-emp-form-' + ei + '\').style.display=\'none\'" style="width:auto;padding:8px 14px;font-size:13px;">Cancelar</button>' +
           '</div>' +
         '</div>' +
@@ -1326,6 +1373,66 @@ function eliminarEdicion(ei) {
 
 function mostrarFormNuevoEmp(ei) {
   document.getElementById('nuevo-emp-form-' + ei).style.display = 'block';
+}
+
+// ════════════════════════════════════════════════
+//  UPLOAD LOGO A R2
+// ════════════════════════════════════════════════
+function previewLogo(ei, input) {
+  const file = input.files[0];
+  if (!file) return;
+
+  const previewEl = document.getElementById('upload-preview-' + ei);
+  const statusEl  = document.getElementById('upload-status-' + ei);
+  const archivoEl = document.getElementById('nuevo-emp-archivo-' + ei);
+
+  // Mostrar miniatura local
+  const reader = new FileReader();
+  reader.onload = e => {
+    previewEl.innerHTML =
+      '<img src="' + e.target.result + '" alt="preview" />' +
+      '<span class="upload-text" style="font-size:12px;">' + esc(file.name) + '</span>';
+  };
+  reader.readAsDataURL(file);
+
+  // Subir a R2
+  statusEl.className = 'upload-status uploading';
+  statusEl.textContent = '⏳ Subiendo a Cloudflare R2…';
+
+  const btnAgregar = document.getElementById('btn-agregar-' + ei);
+  if (btnAgregar) btnAgregar.disabled = true;
+
+  const reader2 = new FileReader();
+  reader2.onload = async ev => {
+    const base64 = ev.target.result.split(',')[1];
+    try {
+      const pin = sessionStorage.getItem('admin_pin');
+      const r = await fetch('/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          filename: file.name,
+          data: base64,
+          contentType: file.type,
+          folder: 'logos',
+          pin
+        })
+      });
+      const result = await r.json();
+      if (!r.ok) throw new Error(result.error || 'Error al subir');
+
+      // Auto-rellenar el campo archivo
+      archivoEl.value = file.name;
+      statusEl.className = 'upload-status ok';
+      statusEl.textContent = '✓ Subido correctamente → ' + result.url;
+      if (btnAgregar) btnAgregar.disabled = false;
+    } catch (e) {
+      statusEl.className = 'upload-status err';
+      statusEl.textContent = '❌ ' + e.message + ' — puedes escribir el nombre manualmente.';
+      if (btnAgregar) btnAgregar.disabled = false;
+    }
+  };
+  reader2.readAsDataURL(file);
 }
 
 function confirmarNuevoEmp(ei) {
