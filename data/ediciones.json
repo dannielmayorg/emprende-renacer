@@ -5,6 +5,7 @@
     "emprendimientos": [
       {
         "archivo": "5 nueces.jpeg",
+        "nombre": "5 nueces",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -13,6 +14,7 @@
       },
       {
         "archivo": "A tu abrigo.jpeg",
+        "nombre": "A tu abrigo",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -21,6 +23,7 @@
       },
       {
         "archivo": "ACADEMIA LATIN GOSPEL 40.jpeg",
+        "nombre": "ACADEMIA LATIN GOSPEL 40",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -29,6 +32,7 @@
       },
       {
         "archivo": "Aguacates en casa.com.jpeg",
+        "nombre": "Aguacates en casa.com",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -37,6 +41,7 @@
       },
       {
         "archivo": "Biblia Fest.png",
+        "nombre": "Biblia Fest",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -45,6 +50,7 @@
       },
       {
         "archivo": "BIKEWAY Ropa deportiva.jpeg",
+        "nombre": "BIKEWAY Ropa deportiva",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -53,6 +59,7 @@
       },
       {
         "archivo": "Belleza Radiante.jpeg",
+        "nombre": "Belleza Radiante",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -61,6 +68,7 @@
       },
       {
         "archivo": "Bye Spot.jpeg",
+        "nombre": "Bye Spot",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -69,6 +77,7 @@
       },
       {
         "archivo": "CASA CREA.jpeg",
+        "nombre": "CASA CREA",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -77,6 +86,7 @@
       },
       {
         "archivo": "CREW.png",
+        "nombre": "CREW",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -85,6 +95,7 @@
       },
       {
         "archivo": "Ciudad gospel.png",
+        "nombre": "Ciudad gospel",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -93,6 +104,7 @@
       },
       {
         "archivo": "DNC Studio Collectives.jpeg",
+        "nombre": "DNC Studio Collectives",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -101,6 +113,7 @@
       },
       {
         "archivo": "DULCE TENTACIÓN.jpeg",
+        "nombre": "DULCE TENTACIÓN",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -109,6 +122,7 @@
       },
       {
         "archivo": "Diana López - Catsitter.jpeg",
+        "nombre": "Diana López - Catsitter",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -117,6 +131,7 @@
       },
       {
         "archivo": "Diseño Divino.jpeg",
+        "nombre": "Diseño Divino",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -125,6 +140,7 @@
       },
       {
         "archivo": "El alfarero creaciones.jpeg",
+        "nombre": "El alfarero creaciones",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -133,6 +149,7 @@
       },
       {
         "archivo": "FIREWOOD VIBES.jpeg",
+        "nombre": "FIREWOOD VIBES",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -141,6 +158,7 @@
       },
       {
         "archivo": "HacksGabs.jpeg",
+        "nombre": "HacksGabs",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -149,6 +167,7 @@
       },
       {
         "archivo": "Honney Poppy's pasteleria.jpeg",
+        "nombre": "Honney Poppy's pasteleria",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -157,6 +176,7 @@
       },
       {
         "archivo": "Instrumentos de gracia by Erika Beltran.png",
+        "nombre": "Instrumentos de gracia by Erika Beltran",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -165,6 +185,7 @@
       },
       {
         "archivo": "Les Colors.jpeg",
+        "nombre": "Les Colors",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -173,6 +194,7 @@
       },
       {
         "archivo": "Los postres de Majito.jpeg",
+        "nombre": "Los postres de Majito",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -181,6 +203,7 @@
       },
       {
         "archivo": "MiniDonedos.jpeg",
+        "nombre": "MiniDonedos",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -189,6 +212,7 @@
       },
       {
         "archivo": "Misión Turquía.jpeg",
+        "nombre": "Misión Turquía",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -197,6 +221,7 @@
       },
       {
         "archivo": "Misión wayu.png",
+        "nombre": "Misión wayu",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -205,6 +230,7 @@
       },
       {
         "archivo": "NUDOS PELUDOS.jpeg",
+        "nombre": "NUDOS PELUDOS",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -213,6 +239,7 @@
       },
       {
         "archivo": "Pétalos de Chenille.jpeg",
+        "nombre": "Pétalos de Chenille",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -221,6 +248,7 @@
       },
       {
         "archivo": "Plantas Greenlove.jpeg",
+        "nombre": "Plantas Greenlove",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -229,6 +257,7 @@
       },
       {
         "archivo": "RENAWARE.jpeg",
+        "nombre": "RENAWARE",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -237,6 +266,7 @@
       },
       {
         "archivo": "SM Accesorios.jpeg",
+        "nombre": "SM Accesorios",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -245,6 +275,7 @@
       },
       {
         "archivo": "SOMBRILLAS GO.jpeg",
+        "nombre": "SOMBRILLAS GO",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -253,6 +284,7 @@
       },
       {
         "archivo": "Sabores de mi tierra.jpeg",
+        "nombre": "Sabores de mi tierra",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -261,6 +293,7 @@
       },
       {
         "archivo": "ancla firme decoración.jpeg",
+        "nombre": "ancla firme decoración",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -269,6 +302,7 @@
       },
       {
         "archivo": "la colmena artesanal.png",
+        "nombre": "la colmena artesanal",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -277,6 +311,7 @@
       },
       {
         "archivo": "purifil.jpeg",
+        "nombre": "purifil",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -285,6 +320,7 @@
       },
       {
         "archivo": "El Fogón Costeño.jpeg",
+        "nombre": "El Fogón Costeño",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
@@ -293,6 +329,7 @@
       },
       {
         "archivo": "Benema Café.png",
+        "nombre": "Benema Café",
         "categoria": "",
         "descripcion": "",
         "contacto_whatsapp": "",
